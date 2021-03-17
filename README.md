@@ -17,4 +17,5 @@ Learn the fundamentals of Syntactically Awesome Stylesheets (Sass), a modern web
 
 ## Skills covered
 
-SASSFront-end Development
+- SASS
+- Front-end Development
