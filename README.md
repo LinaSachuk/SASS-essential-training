@@ -363,9 +363,25 @@ Placeholder selectors are useful when writing a Sass library where each style ru
 
 ## Sass variables 
 
+Sass variables are simple: you assign a value to a name that begins with $, and then you can refer to that name instead of the value itself. But despite their simplicity, they're one of the most useful tools Sass brings to the table. Variables make it possible to reduce repetition, do complex math, configure libraries, and much more.
+
+A variable declaration looks a lot like a property declaration: it’s written <variable>: <expression>. Unlike a property, which can only be declared in a style rule or at-rule, variables can be declared anywhere you want. To use a variable, just include it in a value.
+
+```SCSS
+
+$base-color: #c6538c;
+$border-dark: rgba($base-color, 0.88);
+
+.alert {
+  border: 1px solid $border-dark;
+}
+
+
+```
 
 
 
+## Default Values
 
 
 
