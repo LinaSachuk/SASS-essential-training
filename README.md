@@ -521,12 +521,62 @@ Variables in flow control scope can assign to existing variables in the outer sc
 
 ## Advanced Variable Functions
 
+The Sass core library provides a couple advanced functions for working with variables. The meta.variable-exists() function returns whether a variable with the given name exists in the current scope, and the meta.global-variable-exists() function does the same but only for the global scope.
 
-
+Users occasionally want to use interpolation to define a variable name based on another variable. Sass doesn’t allow this, because it makes it much harder to tell at a glance which variables are defined where. What you can do, though, is define a map from names to values that you can then access using variables.
 
 ```SCSS
 
+@use "sass:map";
 
+$theme-colors: (
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+);
+
+.alert {
+  // Instead of $theme-color-#{warning}
+  background-color: map.get($theme-colors, "warning");
+}
+
+
+```
+
+## Interpolation
+
+Interpolation can be used almost anywhere in a Sass stylesheet to embed the result of a SassScript expression into a chunk of CSS. Just wrap an expression in #{} in any of the following places:
+
+- Selectors in style rules
+- Property names in declarations
+- Custom property values
+- CSS at-rules
+- @extends
+- Plain CSS @imports
+- Quoted or unquoted strings
+- Special functions
+- Plain CSS function names
+- Loud comments
+
+```SCSS
+
+@mixin corner-icon($name, $top-or-bottom, $left-or-right) {
+  .icon-#{$name} {
+    background-image: url("/icons/#{$name}.svg");
+    position: absolute;
+    #{$top-or-bottom}: 0;
+    #{$left-or-right}: 0;
+  }
+}
+
+@include corner-icon("mail", top, left);
+
+```
+
+## In SassScript 
+
+
+```SASS
 
 
 ```
