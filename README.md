@@ -573,10 +573,45 @@ Interpolation can be used almost anywhere in a Sass stylesheet to embed the resu
 
 ```
 
-## In SassScript 
+## Interpolation In SassScript 
+
+Interpolation can be used in SassScript to inject SassScript into unquoted strings. This is particularly useful when dynamically generating names (for example for animations), or when using slash-separated values. Note that interpolation in SassScript always returns an unquoted string.
+
+```SASS
+
+@mixin inline-animation($duration) {
+  $name: inline-#{unique-id()};
+
+  @keyframes #{$name} {
+    @content;
+  }
+
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-iteration-count: infinite;
+}
+
+.pulse {
+  @include inline-animation(2s) {
+    from { background-color: yellow }
+    to { background-color: red }
+  }
+}
+
+```
+
+It’s almost always a bad idea to use interpolation with numbers. Interpolation returns unquoted strings that can’t be used for any further math, and it avoids Sass’s built-in safeguards to ensure that units are used correctly.
+
+Sass has powerful unit arithmetic that you can use instead. For example, instead of writing #{$width}px, write $width * 1px—or better yet, declare the $width variable in terms of px to begin with. That way if $width already has units, you’ll get a nice error message instead of compiling bogus CSS.
+
+
+## Quoted Strings
+
+
 
 
 ```SASS
+
 
 
 ```
