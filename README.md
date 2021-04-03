@@ -652,6 +652,62 @@ Sass also has some special behavior for plain CSS at-rules: they can contain int
 
 The @use rule loads mixins, functions, and variables from other Sass stylesheets, and combines CSS from multiple stylesheets together. Stylesheets loaded by @use are called "modules". Sass also provides built-in modules full of useful functions.
 
+A stylesheet’s @use rules must come before any rules other than @forward, including style rules. However, you can declare variables before @use rules to use when configuring modules.
+
+
+```SCSS
+
+// foundation/_code.scss
+code {
+  padding: .25em;
+  line-height: 0;
+}
+
+```
+
+
+```SCSS
+
+// foundation/_lists.scss
+ul, ol {
+  text-align: left;
+
+  & & {
+    padding: {
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+```
+
+```SCSS
+
+// style.scss
+@use 'foundation/code';
+@use 'foundation/lists';
+
+```
+
+## Loading Members
+
+You can access variables, functions, and mixins from another module by writing 
+
+```SCSS
+
+<namespace>.<variable>,
+<namespace>.<function>(), 
+ or @include <namespace>.<mixin>()
+
+```
+
+By default, the namespace is just the last component of the module’s URL.
+
+Members (variables, functions, and mixins) loaded with @use are only visible in the stylesheet that loads them. Other stylesheets will need to write their own @use rules if they also want to access them. This helps make it easy to figure out exactly where each member is coming from. If you want to load members from many files at once, you can use the @forward rule to forward them all from one shared file.
+
+
+
 
 
 
