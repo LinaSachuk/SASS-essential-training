@@ -706,7 +706,32 @@ By default, the namespace is just the last component of the module’s URL.
 
 Members (variables, functions, and mixins) loaded with @use are only visible in the stylesheet that loads them. Other stylesheets will need to write their own @use rules if they also want to access them. This helps make it easy to figure out exactly where each member is coming from. If you want to load members from many files at once, you can use the @forward rule to forward them all from one shared file.
 
+Because @use adds namespaces to member names, it’s safe to choose very simple names like $radius or $width when writing a stylesheet. This is different from the old @import rule, which encouraged that users write long names like $mat-corner-radius to avoid conflicts with other libraries, and it helps keep your stylesheets clear and easy to read!
 
+```SASS
+
+// src/_corners.scss
+$radius: 3px;
+
+@mixin rounded {
+  border-radius: $radius;
+}
+
+```
+
+```SASS
+
+// style.scss
+@use "src/corners";
+
+.button {
+  @include corners.rounded;
+  padding: 5px + corners.$radius;
+}
+
+```
+
+## Choosing a Namespace 
 
 
 
