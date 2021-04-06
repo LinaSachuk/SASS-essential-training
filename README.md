@@ -787,8 +787,39 @@ $radius: 3px;
 
 ## Private Members
 
+As a stylesheet author, you may not want all the members you define to be available outside your stylesheet. Sass makes it easy to define a private member by starting its name with either - or _. These members will work just like normal within the stylesheet that defines them, but they won’t be part of a module’s public API. That means stylesheets that load your module can’t see them!
+
+If you want to make a member private to an entire package rather than just a single module, just don’t forward its module from any of your package’s entry points (the stylesheets you tell your users to load to use your package). You can even hide that member while forwarding the rest of its module!
 
 
+```SCSS
+
+// src/_corners.scss
+$-radius: 3px;
+
+@mixin rounded {
+  border-radius: $-radius;
+}
+
+
+```
+
+```SCSS
+
+// style.scss
+@use "src/corners";
+
+.button {
+  @include corners.rounded;
+
+  // This is an error! $-radius isn't visible outside of `_corners.scss`.
+  padding: 5px + corners.$-radius;
+}
+
+```
+
+
+## Configuration 
 
 
 
