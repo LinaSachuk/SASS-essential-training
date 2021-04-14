@@ -221,13 +221,37 @@ We've created a very simple fluid grid, based on 960px. Operations in Sass let u
 
 ## SCSS
 
+The SCSS syntax uses the file extension .scss. With a few small exceptions, it’s a superset of CSS, which means essentially all valid CSS is valid SCSS as well. Because of its similarity to CSS, it’s the easiest syntax to get used to and the most popular.
+SCSS looks like this:
 
 
 ```SCSS
 
+@mixin button-base() {
+  @include typography(button);
+  @include ripple-surface;
+  @include ripple-radius-bounded;
 
+  display: inline-flex;
+  position: relative;
+  height: $button-height;
+  border: none;
+  vertical-align: middle;
+
+  &:hover { cursor: pointer; }
+
+  &:disabled {
+    color: $mdc-button-disabled-ink-color;
+    cursor: default;
+    pointer-events: none;
+  }
+}
 
 ```
+
+## The Indented Syntax
+
+
 
 
 ```SCSS
