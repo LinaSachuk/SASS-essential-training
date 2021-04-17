@@ -288,6 +288,42 @@ Just like CSS, most Sass stylesheets are mainly made up of style rules that cont
 
 ## Statements 
 
+A Sass stylesheet is made up of a series of statements, which are evaluated in order to build the resulting CSS. Some statements may have blocks, defined using { and }, which contain other statements. For example, a style rule is a statement with a block. That block contains other statements, such as property declarations.
+
+In SCSS, statements are separated by semicolons (which are optional if the statement uses a block). In the indented syntax, they’re just separated by newlines.
+
+1. Universal Statements:
+  These types of statements can be used anywhere in a Sass stylesheet:
+
+   - Variable declarations, like $var: value.
+   - Flow control at-rules, like @if and @each.
+   - The @error, @warn, and @debug rules.
+
+2. CSS Statements:
+  These statements produce CSS. They can be used anywhere except within a @function:
+
+   - Style rules, like h1 { /* ... */ }.
+   - CSS at-rules, like @media and @font-face.
+   - Mixin uses using @include.
+   - The @at-root rule.
+   - Top-Level Statements permalink
+
+3. Top-Level Statements:
+  These statements can only be used at the top level of a stylesheet, or nested within a CSS statement at the top level:
+
+   - Module loads, using @use.
+   - Imports, using @import.
+   - Mixin definitions using @mixin.
+   - Function definitions using @function.
+
+4. Other Statements:
+
+      - Property declarations like width: 100px may  only be used within style rules and some CSS at-rules.
+      - The @extend rule may only be used within style rules.
+
+
+## Expressions
+
 
 ```SCSS
 
