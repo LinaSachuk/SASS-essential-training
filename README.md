@@ -324,6 +324,21 @@ In SCSS, statements are separated by semicolons (which are optional if the state
 
 ## Expressions
 
+An expression is anything that goes on the right-hand side of a property or variable declaration. Each expression produces a value. Any valid CSS property value is also a Sass expression, but Sass expressions are much more powerful than plain CSS values. They’re passed as arguments to mixins and functions, used for control flow with the @if rule, and manipulated using arithmetic. We call Sass’s expression syntax SassScript.
+
+- Literals 
+The simplest expressions just represent static values:
+
+ 1. Numbers, which may or may not have units, like 12 or 100px.
+  1. Strings, which may or may not have quotes, like "Helvetica Neue" or bold.
+  2. Colors, which can be referred to by their hex representation or by name, like #c6538c or blue.
+  3. The boolean literals true or false.
+  4. The singleton null.
+  5. Lists of values, which may be separated by spaces or commas and which may be enclosed in square brackets or no brackets at all, like 1.5em 1em 0 2em, Helvetica, Arial, sans-serif, or [col1-start].
+  6. Maps that associate values with keys, like ("background": red, "foreground": pink).
+
+  - Operations 
+
 
 ```SCSS
 
