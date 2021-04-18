@@ -326,18 +326,41 @@ In SCSS, statements are separated by semicolons (which are optional if the state
 
 An expression is anything that goes on the right-hand side of a property or variable declaration. Each expression produces a value. Any valid CSS property value is also a Sass expression, but Sass expressions are much more powerful than plain CSS values. They’re passed as arguments to mixins and functions, used for control flow with the @if rule, and manipulated using arithmetic. We call Sass’s expression syntax SassScript.
 
-- Literals 
+- Literals: 
 The simplest expressions just represent static values:
 
- 1. Numbers, which may or may not have units, like 12 or 100px.
-  1. Strings, which may or may not have quotes, like "Helvetica Neue" or bold.
-  2. Colors, which can be referred to by their hex representation or by name, like #c6538c or blue.
-  3. The boolean literals true or false.
-  4. The singleton null.
-  5. Lists of values, which may be separated by spaces or commas and which may be enclosed in square brackets or no brackets at all, like 1.5em 1em 0 2em, Helvetica, Arial, sans-serif, or [col1-start].
-  6. Maps that associate values with keys, like ("background": red, "foreground": pink).
+   1. Numbers, which may or may not have units, like 12 or 100px.
+   2. Strings, which may or may not have quotes, like "Helvetica Neue" or bold.
+   3. Colors, which can be referred to by their hex representation or by name, like #c6538c or blue.
+   4. The boolean literals true or false.
+   5. The singleton null.
+   6. Lists of values, which may be separated by spaces or commas and which may be enclosed in square brackets or no brackets at all, like 1.5em 1em 0 2em, Helvetica, Arial, sans-serif, or [col1-start].
+   7. Maps that associate values with keys, like ("background": red, "foreground": pink).
 
-  - Operations 
+  - Operations: 
+
+Sass defines syntax for a number of operations:
+
+  1. == and != are used to check if two values are the same.
+  2. +, -, *, /, and % have their usual mathematical meaning for numbers, with special behaviors for units that matches the use of units in scientific math.
+  3. <, <=, >, and >= check whether two numbers are greater or less than one another.
+  and, or, and not have the usual boolean behavior. Sass considers every value “true” except for false and null.
+  4. +, -, and / can be used to concatenate strings.
+  ( and ) can be used to explicitly control the precedence order of operations.
+
+  - Other Expressions:
+  
+  1. Variables, like $var.
+  2. Function calls, like nth($list, 1) or var(--main-bg-color), which may call Sass core library functions or user-defined functions, or which may be compiled directly to CSS.
+  3. Special functions, like calc(1px + 100%) or url(http://myapp.com/assets/logo.png), that have their own unique parsing rules.
+  4. The parent selector, &.
+  5. The value !important, which is parsed as an unquoted string.
+
+# Special Functions
+
+CSS defines many functions, and most of them work just fine with Sass’s normal function syntax. They’re parsed as function calls, resolved to plain CSS functions, and compiled as-is to CSS. There are a few exceptions, though, which have special syntax that can’t just be parsed as a SassScript expression. All special function calls return unquoted strings.
+
+## url()
 
 
 ```SCSS
