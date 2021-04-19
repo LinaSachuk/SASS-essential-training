@@ -362,12 +362,47 @@ CSS defines many functions, and most of them work just fine with Sass’s normal
 
 ## url()
 
+The url() function is commonly used in CSS, but its syntax is different than other functions: it can take either a quoted or unquoted URL. Because an unquoted URL isn’t a valid SassScript expression, Sass needs special logic to parse it.
+
+If the url()‘s argument is a valid unquoted URL, Sass parses it as-is, although interpolation may also be used to inject SassScript values. If it’s not a valid unquoted URL—for example, if it contains variables or function calls—it’s parsed as a normal plain CSS function call.
 
 ```SCSS
+
+$roboto-font-path: "../fonts/roboto";
+
+@font-face {
+    // This is parsed as a normal function call that takes a quoted string.
+    src: url("#{$roboto-font-path}/Roboto-Thin.woff2") format("woff2");
+
+    font-family: "Roboto";
+    font-weight: 100;
+}
+
+@font-face {
+    // This is parsed as a normal function call that takes an arithmetic
+    // expression.
+    src: url($roboto-font-path + "/Roboto-Light.woff2") format("woff2");
+
+    font-family: "Roboto";
+    font-weight: 300;
+}
+
+@font-face {
+    // This is parsed as an interpolated special function.
+    src: url(#{$roboto-font-path}/Roboto-Regular.woff2) format("woff2");
+
+    font-family: "Roboto";
+    font-weight: 400;
+}
 
 
 
 ```
+
+--- 
+
+## calc(), clamp(), element(), progid:...(), and expression()
+
 
 
 ```SCSS
