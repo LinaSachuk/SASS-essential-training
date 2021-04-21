@@ -403,13 +403,28 @@ $roboto-font-path: "../fonts/roboto";
 
 ## calc(), clamp(), element(), progid:...(), and expression()
 
+The calc(), clamp() and element() functions are defined in the CSS spec. Because calc()’s mathematical expressions conflict with Sass’s arithmetic, and element()’s IDs could be parsed as colors, they need special parsing.
 
+expression() and functions beginning with progid: are legacy Internet Explorer features that use non-standard syntax. Although they’re no longer supported by recent browsers, Sass continues to parse them for backwards compatibility.
+
+Sass allows any text in these function calls, including nested parentheses. Nothing is interpreted as a SassScript expression, with the exception that interpolation can be used to inject dynamic values.
 
 ```SCSS
 
-
+.logo {
+  $width: 800px;
+  width: $width;
+  position: absolute;
+  left: calc(50% - #{$width / 2});
+  top: 0;
+}
 
 ```
+
+--- 
+
+## min() and max()
+
 
 ```SCSS
 
