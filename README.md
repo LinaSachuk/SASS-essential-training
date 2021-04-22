@@ -471,14 +471,32 @@ Style rules are the foundation of Sass, just like they are for CSS. And they wor
 
 ## Nesting permalinkNesting
 
-
+But Sass wants to make your life easier. Rather than repeating the same selectors over and over again, you can write one style rules inside another. Sass will automatically combine the outer rule’s selector with the inner rule’s.
 
 
 ```SCSS
 
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
 
 ```
+
+Nested rules are super helpful, but they can also make it hard to visualize how much CSS you’re actually generating. The deeper you nest, the more bandwidth it takes to serve your CSS and the more work it takes the browser to render it. Keep those selectors shallow!
+
+1. Selector Lists
 
 
 ```SCSS
