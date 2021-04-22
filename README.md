@@ -425,6 +425,54 @@ Sass allows any text in these function calls, including nested parentheses. Noth
 
 ## min() and max()
 
+CSS added support for min() and max() functions in Values and Units Level 4, from where they were quickly adopted by Safari to support the iPhoneX. But Sass supported its own min() and max() functions long before this, and it needed to be backwards-compatible with all those existing stylesheets. This led for the need for extra-special syntactic cleverness.
+
+If a min() or max() function call is valid plain CSS, it will be compiled to a CSS min() or max() call. “Plain CSS” includes nested calls to calc(), env(), var(), min(), or max(), as well as interpolation. As soon as any part of the call contains a SassScript feature like variables or function calls, though, it’s parsed as a call to Sass’s core min() or max() function instead.
+
+
+```SCSS
+
+$padding: 12px;
+
+.post {
+  // Since these max() calls don't use any Sass features other than
+  // interpolation, they're compiled to CSS max() calls.
+  padding-left: max(#{$padding}, env(safe-area-inset-left));
+  padding-right: max(#{$padding}, env(safe-area-inset-right));
+}
+
+.sidebar {
+  // Since these refer to a Sass variable without interpolation, they call
+  // Sass's built-in max() function.
+  padding-left: max($padding, 20px);
+  padding-right: max($padding, 20px);
+}
+
+```
+
+---- 
+
+# Style Rules
+
+Style rules are the foundation of Sass, just like they are for CSS. And they work the same way: you choose which elements to style with a selector, and declare properties that affect how those elements look.
+
+```SCSS
+
+.button {
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+  border: 1px solid #e1e4e8;
+}
+
+```
+
+---
+
+## Nesting permalinkNesting
+
+
+
 
 ```SCSS
 
@@ -439,8 +487,58 @@ Sass allows any text in these function calls, including nested parentheses. Noth
 
 ```
 
+
+
 ```SCSS
 
 
 
 ```
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
