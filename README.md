@@ -498,12 +498,25 @@ Nested rules are super helpful, but they can also make it hard to visualize how 
 
 1. Selector Lists
 
+Nested rules are clever about handling selector lists (that is, comma-separated selectors). Each complex selector (the ones between the commas) is nested separately, and then they’re combined back into a selector list.
 
 ```SCSS
 
-
+.alert, .warning {
+  ul, p {
+    margin-right: 0;
+    margin-left: 0;
+    padding-bottom: 0;
+  }
+}
 
 ```
+
+--- 
+
+## Selector Combinators
+
+
 
 
 
