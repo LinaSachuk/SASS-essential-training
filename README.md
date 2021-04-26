@@ -547,20 +547,28 @@ p {
 
 ## Interpolation
 
-
-
-
-
-
-
-
+You can use interpolation to inject values from expressions like variables and function calls into your selectors. This is particularly useful when you’re writing mixins, since it allows you to create selectors from parameters your users pass in.
 
 
 ```SCSS
 
+@mixin define-emoji($name, $glyph) {
+  span.emoji-#{$name} {
+    font-family: IconFont;
+    font-variant: normal;
+    font-weight: normal;
+    content: $glyph;
+  }
+}
 
+@include define-emoji("women-holding-hands", "👭");
 
 ```
+
+You can combine interpolation with the parent selector &, the @at-root rule, and selector functions to wield some serious power when dynamically generating selectors. For more information, see the parent selector documentation.
+
+--- 
+
 
 
 
