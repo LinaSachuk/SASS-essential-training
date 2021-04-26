@@ -516,15 +516,45 @@ Nested rules are clever about handling selector lists (that is, comma-separated 
 
 ## Selector Combinators
 
-
-
+You can nest selectors that use combinators as well. You can put the combinator at the end of the outer selector, at the beginning of the inner selector, or even all on its own in between the two.
 
 
 ```SCSS
 
+ul > {
+  li {
+    list-style-type: none;
+  }
+}
 
+h2 {
+  + p {
+    border-top: 1px solid gray;
+  }
+}
+
+p {
+  ~ {
+    span {
+      opacity: 0.8;
+    }
+  }
+}
 
 ```
+
+--- 
+
+## Interpolation
+
+
+
+
+
+
+
+
+
 
 ```SCSS
 
