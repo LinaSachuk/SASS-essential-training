@@ -569,23 +569,43 @@ You can combine interpolation with the parent selector &, the @at-root rule, and
 
 --- 
 
+## Nesting SCSS
 
+Many CSS properties start with the same prefix that acts as a kind of namespace. For example, font-family, font-size, and font-weight all start with font-. Sass makes this easier and less redundant by allowing property declarations to be nested. The outer property names are added to the inner, separated by a hyphen.
+
+```SCSS
+
+.enlarge {
+  font-size: 14px;
+  transition: {
+    property: font-size;
+    duration: 4s;
+    delay: 2s;
+  }
+
+  &:hover { font-size: 36px; }
+}
+
+```
+
+Some of these CSS properties have shorthand versions that use the namespace as the property name. For these, you can write both the shorthand value and the more explicit nested versions.
 
 
 ```SCSS
 
-
-
-```
-
-
-
-
-```SCSS
-
-
+.info-page {
+  margin: auto {
+    bottom: 10px;
+    top: 2px;
+  }
+}
 
 ```
+ 
+--- 
+
+## Hidden Declarations
+
 
 
 
