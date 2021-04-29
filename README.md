@@ -606,14 +606,23 @@ Some of these CSS properties have shorthand versions that use the namespace as t
 
 ## Hidden Declarations
 
-
+Sometimes you only want a property declaration to show up some of the time. If a declaration’s value is null or an empty unquoted string, Sass won’t compile that declaration to CSS at all.
 
 
 ```SCSS
 
+$rounded-corners: false;
 
+.button {
+  border: 1px solid black;
+  border-radius: if($rounded-corners, 5px, null);
+}
 
 ```
+
+--- 
+
+## Custom Properties
 
 
 
