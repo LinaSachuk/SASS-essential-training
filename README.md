@@ -624,14 +624,31 @@ $rounded-corners: false;
 
 ## Custom Properties
 
+CSS custom properties, also known as CSS variables, have an unusual declaration syntax: they allow almost any text at all in their declaration values. What’s more, those values are accessible to JavaScript, so any value might potentially be relevant to the user. This includes values that would normally be parsed as SassScript.
 
+Because of this, Sass parses custom property declarations differently than other property declarations. All tokens, including those that look like SassScript, are passed through to CSS as-is. The only exception is interpolation, which is the only way to inject dynamic values into a custom property.
 
 ```SCSS
 
+$primary: #81899b;
+$accent: #302e24;
+$warn: #dfa612;
 
+:root {
+  --primary: #{$primary};
+  --accent: #{$accent};
+  --warn: #{$warn};
+
+  // Even though this looks like a Sass variable, it's valid CSS so it's not
+  // evaluated.
+  --consumed-by-js: $primary;
+}
 
 ```
 
+--- 
+
+# Parent Selector
 
 
 ```SCSS
