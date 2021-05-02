@@ -713,27 +713,40 @@ You can also use the parent selector to add extra suffixes to the outer selector
 
 ## In SassScript
 
-
-
-
-
-
+The parent selector can also be used within SassScript. It’s a special expression that returns the current parent selector in the same format used by selector functions: a comma-separated list (the selector list) that contains space-separated lists (the complex selectors) that contain unquoted strings (the compound selectors).
 
 
 ```SCSS
 
-
+.main aside:hover,
+.sidebar p {
+  parent-selector: &;
+  // => ((unquote(".main") unquote("aside:hover")),
+  //     (unquote(".sidebar") unquote("p")))
+}
 
 ```
 
-
+If the & expression is used outside any style rules, it returns null. Since null is falsey, this means you can easily use it to determine whether a mixin is being called in a style rule or not.
 
 ```SCSS
 
+@mixin app-background($color) {
+  #{if(&, '&.app-background', '.app-background')} {
+    background-color: $color;
+    color: rgba(#fff, 0.75);
+  }
+}
 
+@include app-background(#036);
+
+.sidebar {
+  @include app-background(#c6538c);
+}
 
 ```
 
+## Advanced Nesting
 
 
 
