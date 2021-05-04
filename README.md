@@ -748,15 +748,37 @@ If the & expression is used outside any style rules, it returns null. Since null
 
 ## Advanced Nesting
 
+You can use & as a normal SassScript expression, which means you can pass it to functions or include it in interpolation—even in other selectors! Using it in combination with selector functions and the @at-root rule allows you to nest selectors in very powerful ways.
 
-
-
+For example, suppose you want to write a selector that matches the outer selector and an element selector. You could write a mixin like this one that uses the selector.unify() function to combine & with a user’s selector.
 
 ```SCSS
 
+@use "sass:selector";
 
+@mixin unify-parent($child) {
+  @at-root #{selector.unify(&, $child)} {
+    @content;
+  }
+}
+
+.wrapper .field {
+  @include unify-parent("input") {
+    /* ... */
+  }
+  @include unify-parent("select") {
+    /* ... */
+  }
+}
 
 ```
+
+When Sass is nesting selectors, it doesn’t know what interpolation was used to generate them. This means it will automatically add the outer selector to the inner selector even if you used & as a SassScript expression. That’s why you need to explicitly use the @at-root rule to tell Sass not to include the outer selector.
+
+
+--- 
+
+# Placeholder Selectors
 
 
 
