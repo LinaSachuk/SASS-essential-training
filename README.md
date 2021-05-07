@@ -842,28 +842,46 @@ $border-dark: rgba($base-color, 0.88);
 }
 
 ```
+
 --- 
 
 ## Default Values
 
+Normally when you assign a value to a variable, if that variable already had a value, its old value is overwritten. But if you’re writing a Sass library, you might want to allow your users to configure your library’s variables before you use them to generate CSS.
 
+To make this possible, Sass provides the !default flag. This assigns a value to a variable only if that variable isn’t defined or its value is null. Otherwise, the existing value will be used.
 
+Variables defined with !default can be configured when loading a module with the @use rule. Sass libraries often use !default variables to allow their users to configure the library’s CSS.
 
-```SCSS
-
-
-
-```
-
-
-
-
+To load a module with configuration, write @use <url> with (<variable>: <value>, <variable>: <value>). The configured values will override the variables’ default values. Only variables written at the top level of the stylesheet with a !default flag can be configured.
 
 ```SCSS
 
+// _library.scss
+$black: #000 !default;
+$border-radius: 0.25rem !default;
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
 
+code {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
 
 ```
+
+```SCSS
+
+// style.scss
+@use 'library' with (
+  $black: #222,
+  $border-radius: 0.1rem
+);
+
+```
+
+--- 
+
+## Built-in Variables
 
 
 
