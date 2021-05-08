@@ -897,16 +897,29 @@ math.$pi: 0;
 
 ## Scope
 
-
+Variables declared at the top level of a stylesheet are global. This means that they can be accessed anywhere in their module after they’ve been declared. But that’s not true for all variables. Those declared in blocks (curly braces in SCSS or indented code in Sass) are usually local, and can only be accessed within the block they were declared.
 
 
 ```SCSS
 
+$global-variable: global value;
 
+.content {
+  $local-variable: local value;
+  global: $global-variable;
+  local: $local-variable;
+}
+
+.sidebar {
+  global: $global-variable;
+
+  // This would fail, because $local-variable isn't in scope:
+  // local: $local-variable;
+}
 
 ```
 
-
+## Shadowing
 
 
 ```SCSS
