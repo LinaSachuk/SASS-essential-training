@@ -883,16 +883,19 @@ code {
 
 ## Built-in Variables
 
-
-
+Variables that are defined by a built-in module cannot be modified.
 
 
 ```SCSS
 
+@use "sass:math" as math;
 
+// This assignment will fail.
+math.$pi: 0;
 
 ```
 
+## Scope
 
 
 
