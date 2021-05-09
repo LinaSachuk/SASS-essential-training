@@ -921,10 +921,156 @@ $global-variable: global value;
 
 ## Shadowing
 
+Local variables can even be declared with the same name as a global variable. If this happens, there are actually two different variables with the same name: one local and one global. This helps ensure that an author writing a local variable doesn’t accidentally change the value of a global variable they aren’t even aware of.
+
+```SCSS
+
+$variable: global value;
+
+.content {
+  $variable: local value;
+  value: $variable;
+}
+
+.sidebar {
+  value: $variable;
+}
+
+```
+
+If you need to set a global variable’s value from within a local scope (such as in a mixin), you can use the !global flag. A variable declaration flagged as !global will always assign to the global scope.
+
+
+```SCSS
+
+$variable: first global value;
+
+.content {
+  $variable: second global value !global;
+  value: $variable;
+}
+
+.sidebar {
+  value: $variable;
+}
+
+```
+
+The !global flag may only be used to set a variable that has already been declared at the top level of a file. It may not be used to declare a new variable.
+
+--- 
+
+## Flow Control Scope
+
 
 ```SCSS
 
 
 
 ```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+```SCSS
+
+
+
+```
+
 
