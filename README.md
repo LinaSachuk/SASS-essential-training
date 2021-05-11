@@ -962,13 +962,32 @@ The !global flag may only be used to set a variable that has already been declar
 
 ## Flow Control Scope
 
+Variables declared in flow control rules have special scoping rules: they don’t shadow variables at the same level as the flow control rule. Instead, they just assign to those variables. This makes it much easier to conditionally assign a value to a variable, or build up a value as part of a loop.
 
 ```SCSS
 
+$dark-theme: true !default;
+$primary-color: #f8bbd0 !default;
+$accent-color: #6a1b9a !default;
 
+@if $dark-theme {
+  $primary-color: darken($primary-color, 60%);
+  $accent-color: lighten($accent-color, 60%);
+}
+
+.button {
+  background-color: $primary-color;
+  border: 1px solid $accent-color;
+  border-radius: 3px;
+}
 
 ```
 
+Variables in flow control scope can assign to existing variables in the outer scope, but they can’t declare new variables there. Make sure the variable is already declared before you assign to it, even if you need to declare it as null.
+
+--- 
+
+## Advanced Variable Functions
 
 
 ```SCSS
