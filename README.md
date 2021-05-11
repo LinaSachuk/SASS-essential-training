@@ -989,12 +989,30 @@ Variables in flow control scope can assign to existing variables in the outer sc
 
 ## Advanced Variable Functions
 
+The Sass core library provides a couple advanced functions for working with variables. The meta.variable-exists() function returns whether a variable with the given name exists in the current scope, and the meta.global-variable-exists() function does the same but only for the global scope.
+
+Users occasionally want to use interpolation to define a variable name based on another variable. Sass doesn’t allow this, because it makes it much harder to tell at a glance which variables are defined where. What you can do, though, is define a map from names to values that you can then access using variables.
 
 ```SCSS
 
+@use "sass:map";
 
+$theme-colors: (
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+);
+
+.alert {
+  // Instead of $theme-color-#{warning}
+  background-color: map.get($theme-colors, "warning");
+}
 
 ```
+
+--- 
+
+# Interpolation
 
 
 
