@@ -1129,32 +1129,52 @@ Sass also has some special behavior for plain CSS at-rules: they can contain int
 
 ## @use
 
+The @use rule loads mixins, functions, and variables from other Sass stylesheets, and combines CSS from multiple stylesheets together. Stylesheets loaded by @use are called "modules". Sass also provides built-in modules full of useful functions.
+
+The simplest @use rule is written @use "<url>", which loads the module at the given URL. Any styles loaded this way will be included exactly once in the compiled CSS output, no matter how many times those styles are loaded.
+
 
 ```SCSS
 
-
+// foundation/_code.scss
+code {
+  padding: .25em;
+  line-height: 0;
+}
 
 ```
 
-
-
 ```SCSS
 
+// foundation/_lists.scss
+ul, ol {
+  text-align: left;
 
+  & & {
+    padding: {
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
 
 ```
 
-
-
 ```SCSS
 
-
+// style.scss
+@use 'foundation/code';
+@use 'foundation/lists';
 
 ```
 
+--- 
+
+## Loading Members
 
 
 ```SCSS
+
 
 
 
