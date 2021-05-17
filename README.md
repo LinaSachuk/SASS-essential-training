@@ -1172,9 +1172,309 @@ ul, ol {
 
 ## Loading Members
 
+You can access variables, functions, and mixins from another module by writing <namespace>.<variable>, <namespace>.<function>(), or @include <namespace>.<mixin>(). By default, the namespace is just the last component of the module’s URL.
+
+Members (variables, functions, and mixins) loaded with @use are only visible in the stylesheet that loads them. Other stylesheets will need to write their own @use rules if they also want to access them. This helps make it easy to figure out exactly where each member is coming from. If you want to load members from many files at once, you can use the @forward rule to forward them all from one shared file.
+
 
 ```SCSS
 
+// src/_corners.scss
+$radius: 3px;
+
+@mixin rounded {
+  border-radius: $radius;
+}
+
+
+```
+
+```SCSS
+
+// style.scss
+@use "src/corners";
+
+.button {
+  @include corners.rounded;
+  padding: 5px + corners.$radius;
+}
+
+```
+
+### Choosing a Namespace
+
+By default, a module’s namespace is just the last component of its URL without a file extension. However, sometimes you might want to choose a different namespace—you might want to use a shorter name for a module you refer to a lot, or you might be loading multiple modules with the same filename. You can do this by writing @use "<url>" as <namespace>.
+
+```SCSS
+
+// src/_corners.scss
+$radius: 3px;
+
+@mixin rounded {
+  border-radius: $radius;
+}
+
+```
+
+```SCSS
+
+// style.scss
+@use "src/corners" as c;
+
+.button {
+  @include c.rounded;
+  padding: 5px + c.$radius;
+}
+
+```
+
+You can even load a module without a namespace by writing @use "<url>" as *. We recommend you only do this for stylesheets written by you, though; otherwise, they may introduce new members that cause name conflicts!
+
+
+```SCSS
+
+// src/_corners.scss
+$radius: 3px;
+
+@mixin rounded {
+  border-radius: $radius;
+}
+
+```
+
+```SCSS
+
+// style.scss
+@use "src/corners" as *;
+
+.button {
+  @include rounded;
+  padding: 5px + $radius;
+}
+
+```
+
+### Private Members
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
 
 
 
@@ -1189,21 +1489,11 @@ ul, ol {
 ```
 
 
-
 ```SCSS
 
 
 
 ```
-
-
-
-```SCSS
-
-
-
-```
-
 
 
 ```SCSS
@@ -1213,6 +1503,12 @@ ul, ol {
 ```
 
 
+```SCSS
+
+
+
+```
+
 
 ```SCSS
 
@@ -1220,4 +1516,80 @@ ul, ol {
 
 ```
 
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
+
+
+```SCSS
+
+
+
+```
 
