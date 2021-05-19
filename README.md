@@ -1284,28 +1284,36 @@ $-radius: 3px;
 ```
 
 ---
- 
-
 ## Configuration
 
-
-
-
-```SCSS
-
-
-
-```
-
-
-
+A stylesheet can define variables with the !default flag to make them configurable. To load a module with configuration, write @use <url> with (<variable>: <value>, <variable>: <value>). The configured values will override the variables’ default values.
 
 
 ```SCSS
 
+// _library.scss
+$black: #000 !default;
+$border-radius: 0.25rem !default;
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
 
+code {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
 
 ```
+
+```SCSS
+
+// style.scss
+@use 'library' with (
+  $black: #222,
+  $border-radius: 0.1rem
+);
+
+```
+
+### With Mixins
 
 
 
