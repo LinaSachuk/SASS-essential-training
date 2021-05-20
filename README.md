@@ -1312,8 +1312,18 @@ code {
 );
 
 ```
+--- 
+## Finding the Module
 
-### With Mixins
+It wouldn’t be any fun to write out absolute URLs for every stylesheet you load, so Sass’s algorithm for finding a module makes it a little easier. For starters, you don’t have to explicitly write out the extension of the file you want to load; @use "variables" will automatically load variables.scss, variables.sass, or variables.css.
+
+All Sass implementations allow users to provide load paths: paths on the filesystem that Sass will look in when locating modules. For example, if you pass node_modules/susy/sass as a load path, you can use @use "susy" to load node_modules/susy/sass/susy.scss.
+
+Modules will always be loaded relative to the current file first, though. Load paths will only be used if no relative file exists that matches the module’s URL. This ensures that you can’t accidentally mess up your relative imports when you add a new library.
+
+--- 
+
+## Loading CSS 
 
 
 
