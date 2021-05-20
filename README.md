@@ -1325,25 +1325,31 @@ Modules will always be loaded relative to the current file first, though. Load p
 
 ## Loading CSS 
 
-
-
-
+In addition to loading .sass and .scss files, Sass can load plain old .css files.
 
 ```SCSS
 
-
+// code.css
+code {
+  padding: .25em;
+  line-height: 0;
+}
 
 ```
-
-
-
-
 
 ```SCSS
 
-
+// style.scss
+@use 'code';
 
 ```
+
+CSS files loaded as modules don’t allow any special Sass features and so can’t expose any Sass variables, functions, or mixins. In order to make sure authors don’t accidentally write Sass in their CSS, all Sass features that aren’t also valid CSS will produce errors. Otherwise, the CSS will be rendered as-is. It can even be extended!
+
+--- 
+
+# @forward
+
 
 
 
