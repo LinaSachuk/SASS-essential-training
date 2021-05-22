@@ -1350,35 +1350,45 @@ CSS files loaded as modules don’t allow any special Sass features and so can�
 
 # @forward
 
+The @forward rule loads a Sass stylesheet and makes its mixins, functions, and variables available when your stylesheet is loaded with the @use rule. It makes it possible to organize Sass libraries across many files, while allowing their users to load a single entrypoint file.
 
+The rule is written @forward "<url>". It loads the module at the given URL just like @use, but it makes the public members of the loaded module available to users of your module as though they were defined directly in your module. Those members aren’t available in your module, though—if you want that, you’ll need to write a @use rule as well. Don’t worry, it’ll only load the module once!
 
-
-
-
-```SCSS
-
-
-
-```
-
-
-
+If you do write both a @forward and a @use for the same module in the same file, it’s always a good idea to write the @forward first. That way, if your users want to configure the forwarded module, that configuration will be applied to the @forward before your @use loads it without any configuration.
 
 
 ```SCSS
 
-
+// src/_list.scss
+@mixin list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 ```
-
-
-
 
 ```SCSS
 
-
+// bootstrap.scss
+@forward "src/list";
 
 ```
+
+```SCSS
+
+// styles.scss
+@use "bootstrap";
+
+li {
+  @include bootstrap.list-reset;
+}
+
+```
+
+--- 
+
+# Adding a Prefix
 
 
 
