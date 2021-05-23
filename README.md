@@ -1390,41 +1390,41 @@ li {
 
 # Adding a Prefix
 
+Because module members are usually used with a namespace, short and simple names are usually the most readable option. But those names might not make sense outside the module they’re defined in, so @forward has the option of adding an extra prefix to all the members it forwards.
 
-
-
-
-
-```SCSS
-
-
-
-```
-
-
-
-
+This is written @forward "<url>" as <prefix>-*, and it adds the given prefix to the beginning of every mixin, function, and variable name forwarded by the module. For example, if the module defines a member named reset and it’s forwarded as list-*, downstream stylesheets will refer to it as list-reset.
 
 
 ```SCSS
 
-
+// src/_list.scss
+@mixin reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 ```
-
-
-
-
-
-
 
 ```SCSS
 
-
+// bootstrap.scss
+@forward "src/list" as list-*;
 
 ```
 
+```SCSS
 
+// styles.scss
+@use "bootstrap";
+
+li {
+  @include bootstrap.list-reset;
+}
+
+```
+
+## Controlling Visibility
 
 
 
