@@ -1426,38 +1426,44 @@ li {
 
 ## Controlling Visibility
 
-
-
-
-
-```SCSS
-
-
-
-```
-
-
-
-
+The @forward rule can also load a module with configuration. This mostly works the same as it does for @use, with one addition: a @forward rule’s configuration can use the !default flag in its configuration. This allows a module to change the defaults of an upstream stylesheet while still allowing downstream stylesheets to override them.
 
 
 ```SCSS
 
+// _library.scss
+$black: #000 !default;
+$border-radius: 0.25rem !default;
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
 
+code {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
 
 ```
-
-
-
-
-
-
 
 ```SCSS
 
-
+// _opinionated.scss
+@forward 'library' with (
+  $black: #222 !default,
+  $border-radius: 0.1rem !default
+);
 
 ```
+
+```SCSS
+
+// style.scss
+@use 'opinionated' with ($black: #333);
+
+```
+
+--- 
+
+# @import
+
 
 
 
