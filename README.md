@@ -1464,42 +1464,52 @@ code {
 
 # @import
 
+Sass extends CSS's @import rule with the ability to import Sass and CSS stylesheets, providing access to mixins, functions, and variables and combining multiple stylesheets' CSS together. Unlike plain CSS imports, which require the browser to make multiple HTTP requests as it renders your page, Sass imports are handled entirely during compilation.
+
+Sass imports have the same syntax as CSS imports, except that they allow multiple imports to be separated by commas rather than requiring each one to have its own @import. Also, in the indented syntax, imported URLs aren’t required to have quotes.
 
 
-
-
-
-
-
-```SCSS
-
-
-
-```
-
-
-
-
-
+The Sass team discourages the continued use of the @import rule. Sass will gradually phase it out over the next few years, and eventually remove it from the language entirely. Prefer the @use rule instead. (Note that only Dart Sass currently supports @use. Users of other implementations must use the @import rule instead.)
 
 
 ```SCSS
 
-
+// foundation/_code.scss
+code {
+  padding: .25em;
+  line-height: 0;
+}
 
 ```
-
-
-
-
-
 
 
 ```SCSS
 
+// foundation/_lists.scss
+ul, ol {
+  text-align: left;
 
+  & & {
+    padding: {
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
 
 ```
+
+```SCSS
+
+// style.scss
+@import 'foundation/code', 'foundation/lists';
+
+```
+
+---
+
+## Importing CSS
+
 
 
 
