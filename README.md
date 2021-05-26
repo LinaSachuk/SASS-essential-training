@@ -1510,30 +1510,31 @@ ul, ol {
 
 ## Importing CSS
 
-
-
-
-
-
-
+In addition to importing .sass and .scss files, Sass can import plain old .css files. The only rule is that the import must not explicitly include the .css extension, because that’s used to indicate a plain CSS @import.
 
 
 ```SCSS
 
-
+// code.css
+code {
+  padding: .25em;
+  line-height: 0;
+}
 
 ```
-
-
-
-
 
 ```SCSS
 
-
+// style.scss
+@import 'code';
 
 ```
 
+CSS files imported by Sass don’t allow any special Sass features. In order to make sure authors don’t accidentally write Sass in their CSS, all Sass features that aren’t also valid CSS will produce errors. Otherwise, the CSS will be rendered as-is. It can even be extended!
+
+----
+
+## Import and Modules
 
 ```SCSS
 
