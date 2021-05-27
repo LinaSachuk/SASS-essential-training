@@ -1534,7 +1534,7 @@ CSS files imported by Sass don’t allow any special Sass features. In order to 
 
 ----
 
-## Import and Modules
+## @mixin and @include
 
 ```SCSS
 
