@@ -1570,19 +1570,47 @@ nav ul {
 
 ## Arguments
 
+Mixins can also take arguments, which allows their behavior to be customized each time they’re called. The arguments are specified in the @mixin rule after the mixin’s name, as a list of variable names surrounded by parentheses. The mixin must then be included with the same number of arguments in the form of SassScript expressions. The values of these expression are available within the mixin’s body as the corresponding variables.
 
 ```SCSS
 
+@mixin rtl($property, $ltr-value, $rtl-value) {
+  #{$property}: $ltr-value;
 
+  [dir=rtl] & {
+    #{$property}: $rtl-value;
+  }
+}
+
+.sidebar {
+  @include rtl(float, left, right);
+}
 
 ```
-
+Normally, every argument a mixin declares must be passed when that mixin is included. However, you can make an argument optional by defining a default value which will be used if that argument isn’t passed. Default values use the same syntax as variable declarations: the variable name, followed by a colon and a SassScript expression. This makes it easy to define flexible mixin APIs that can be used in simple or complex ways.
 
 ```SCSS
 
+@mixin replace-text($image, $x: 50%, $y: 50%) {
+  text-indent: -99999em;
+  overflow: hidden;
+  text-align: left;
 
+  background: {
+    image: $image;
+    repeat: no-repeat;
+    position: $x $y;
+  }
+}
+
+.mail-icon {
+  @include replace-text(url("/images/mail.svg"), 0);
+}
 
 ```
+
+### Passing Arbitrary Arguments 
+
 
 
 ```SCSS
