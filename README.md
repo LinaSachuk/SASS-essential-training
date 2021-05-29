@@ -1611,13 +1611,17 @@ Normally, every argument a mixin declares must be passed when that mixin is incl
 
 ### Passing Arbitrary Arguments 
 
-
+Just like argument lists allow mixins to take arbitrary positional or keyword arguments, the same syntax can be used to pass positional and keyword arguments to a mixin. If you pass a list followed by ... as the last argument of an include, its elements will be treated as additional positional arguments. Similarly, a map followed by ... will be treated as additional keyword arguments. You can even pass both at once!
 
 ```SCSS
 
+$form-selectors: "input.name", "input.address", "input.zip" !default;
 
+@include order(150px, $form-selectors...);
 
 ```
+### Content Blocks
+
 
 
 ```SCSS
