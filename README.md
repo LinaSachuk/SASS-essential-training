@@ -1622,13 +1622,28 @@ $form-selectors: "input.name", "input.address", "input.zip" !default;
 ```
 ### Content Blocks
 
-
+In addition to taking arguments, a mixin can take an entire block of styles, known as a content block. A mixin can declare that it takes a content block by including the @content at-rule in its body. The content block is passed in using curly braces like any other block in Sass, and it’s injected in place of the @content rule.
 
 ```SCSS
 
+@mixin hover {
+  &:not([disabled]):hover {
+    @content;
+  }
+}
 
+.button {
+  border: 1px solid black;
+  @include hover {
+    border-width: 2px;
+  }
+}
 
 ```
+--- 
+
+# @function
+
 
 
 ```SCSS
