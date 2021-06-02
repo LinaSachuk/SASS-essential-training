@@ -1667,13 +1667,27 @@ Functions are defined using the @function at-rule, which is written @function <n
 
 ## Arguments
 
+Arguments allow functions’ behavior to be customized each time they’re called. The arguments are specified in the @function rule after the function’s name, as a list of variable names surrounded by parentheses. The function must be called with the same number of arguments in the form of SassScript expressions. The values of these expression are available within the function’s body as the corresponding variables
+
+### Optional Arguments
+
+Normally, every argument a function declares must be passed when that function is included. However, you can make an argument optional by defining a default value which will be used if that arguments isn’t passed. Default values use the same syntax as variable declarations: the variable name, followed by a colon and a SassScript expression. This makes it easy to define flexible function APIs that can be used in simple or complex ways.
 
 ```SCSS
 
+@function invert($color, $amount: 100%) {
+  $inverse: change-color($color, $hue: hue($color) + 180);
+  @return mix($inverse, $color, $amount);
+}
 
+$primary-color: #036;
+.header {
+  background-color: invert($primary-color, 80%);
+}
 
 ```
 
+### @return
 
 ```SCSS
 
