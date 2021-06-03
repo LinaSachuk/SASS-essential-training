@@ -1689,11 +1689,28 @@ $primary-color: #036;
 
 ### @return
 
+The @return at-rule indicates the value to use as the result of calling a function. It’s only allowed within a @function body, and each @function must end with a @return.
+
+When a @return is encountered, it immediately ends the function and returns its result. Returning early can be useful for handling edge-cases or cases where a more efficient algorithm is available without wrapping the entire function in an @else block.
+
 ```SCSS
 
+@use "sass:string";
 
+@function str-insert($string, $insert, $index) {
+  // Avoid making new strings if we don't need to.
+  @if string.length($string) == 0 {
+    @return $insert;
+  }
+
+  $before: string.slice($string, 0, $index);
+  $after: string.slice($string, $index);
+  @return $before + $insert + $after;
+}
 
 ```
+--- 
+# @extend
 
 
 ```SCSS
