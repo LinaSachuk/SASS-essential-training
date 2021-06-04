@@ -1712,19 +1712,38 @@ When a @return is encountered, it immediately ends the function and returns its 
 --- 
 # @extend
 
+Sass’s @extend rule. It’s written @extend <selector>, and it tells Sass that one selector should inherit the styles of another.
 
 ```SCSS
 
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
 
+  &--serious {
+    @extend .error;
+    border-width: 3px;
+  }
+}
 
 ```
+When one class extends another, Sass styles all elements that match the extender as though they also match the class being extended. When one class selector extends another, it works exactly as though you added the extended class to every element in your HTML that already had the extending class. You can just write class="error--serious", and Sass will make sure it’s styled as though it had class="error" as well.
 
+Of course, selectors aren’t just used on their own in style rules. Sass knows to extend everywhere the selector is used. This ensures that your elements are styled exactly as if they matched the extended selector.
 
 ```SCSS
 
+.error:hover {
+  background-color: #fee;
+}
 
+.error--serious {
+  @extend .error;
+  border-width: 3px;
+}
 
 ```
+## How It Works
 
 
 ```SCSS
