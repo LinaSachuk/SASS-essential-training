@@ -1808,24 +1808,61 @@ $known-prefixes: webkit, moz, ms, o;
 
 ```SCSS
 
-
-
-```
-
-
-```SCSS
-
-
+Sometimes it’s useful to see the value of a variable or expression while you’re developing your stylesheet. That’s what the @debug rule is for: it’s written @debug <expression>, and it prints the value of that expression, along with the filename and line number.
 
 ```
 
 
 ```SCSS
 
+@mixin inset-divider-offset($offset, $padding) {
+  $divider-offset: (2 * $padding) + $offset;
+  @debug "divider offset: #{$divider-offset}";
 
+  margin-left: $divider-offset;
+  width: calc(100% - #{$divider-offset});
+}
 
 ```
 
+--- 
+
+# @at-root
+
+The @at-root rule is usually written @at-root <selector> { ... } and causes everything within it to be emitted at the root of the document instead of using the normal nesting. It's most often used when doing advanced nesting with the SassScript parent selector and selector functions.
+
+For example, suppose you want to write a selector that matches the outer selector and an element selector. You could write a mixin like this one that uses the selector.unify() function to combine & with a user’s selector.
+
+## Beyond Style Rules
+
+On its own, @at-root only gets rid of style rules. Any at-rules like @media or @supports will be left in. If this isn’t what you want, though, you can control exactly what it includes or includes using syntax like media query features, written @at-root (with: <rules...>) { ... } or @at-root (without: <rules...>) { ... }. The (without: ...) query tells Sass which rules should be excluded; the (with: ...) query excludes all rules except those that are listed.
+
+```SCSS
+
+@media print {
+  .page {
+    width: 8in;
+
+    @at-root (without: media) {
+      color: #111;
+    }
+
+    @at-root (with: rule) {
+      font-size: 1.2em;
+    }
+  }
+}
+
+```
+In addition to the names of at-rules, there are two special values that can be used in queries:
+
+- rule refers to style rules. For example, @at-root (with: rule) excludes all at-rules but preserves style rules.
+
+- all refers to all at-rules and style rules should be excluded.
+
+--- 
+
+# Flow Control Rules
 
 ```SCSS
 
