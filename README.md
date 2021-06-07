@@ -1854,6 +1854,7 @@ On its own, @at-root only gets rid of style rules. Any at-rules like @media or @
 }
 
 ```
+
 In addition to the names of at-rules, there are two special values that can be used in queries:
 
 - rule refers to style rules. For example, @at-root (with: rule) excludes all at-rules but preserves style rules.
@@ -1862,13 +1863,33 @@ In addition to the names of at-rules, there are two special values that can be u
 
 --- 
 
-# Flow Control Rules
+# @if and @else
+
+The @if rule is written @if <expression> { ... }, and it controls whether or not its block gets evaluated (including emitting any styles as CSS). The expression usually returns either true or false—if the expression returns true, the block is evaluated, and if the expression returns false it’s not.
 
 ```SCSS
 
+@mixin avatar($size, $circle: false) {
+  width: $size;
+  height: $size;
 
+  @if $circle {
+    border-radius: $size / 2;
+  }
+}
+
+.square-av {
+  @include avatar(100px, $circle: false);
+}
+.circle-av {
+  @include avatar(100px, $circle: true);
+}
+@else permalink
 
 ```
+
+## @else
+
 
 
 ```SCSS
