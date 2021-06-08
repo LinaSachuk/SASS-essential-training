@@ -1890,11 +1890,33 @@ The @if rule is written @if <expression> { ... }, and it controls whether or not
 
 ## @else
 
-
+An @if rule can optionally be followed by an @else rule, written @else { ... }. This rule’s block is evaluated if the @if expression returns false.
 
 ```SCSS
 
+$light-background: #f2ece4;
+$light-text: #036;
+$dark-background: #6b717f;
+$dark-text: #d2e1dd;
 
+@mixin theme-colors($light-theme: true) {
+  @if $light-theme {
+    background-color: $light-background;
+    color: $light-text;
+  } @else {
+    background-color: $dark-background;
+    color: $dark-text;
+  }
+}
+
+.banner {
+  @include theme-colors($light-theme: true);
+  body.dark & {
+    @include theme-colors($light-theme: false);
+  }
+}
 
 ```
+
+## @else if 
 
