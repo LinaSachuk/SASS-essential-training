@@ -1963,12 +1963,26 @@ For example, if you want to check if a string contains a space, you can just wri
 
 ## @each
 
+The @each rule makes it easy to emit styles or evaluate code for each element of a list or each pair in a map. It’s great for repetitive styles that only have a few variations between them. It’s usually written @each <variable> in <expression> { ... }, where the expression returns a list. The block is evaluated for each element of the list in turn, which is assigned to the given variable name.
+
 
 ```SCSS
 
+$sizes: 40px, 50px, 80px;
+
+@each $size in $sizes {
+  .icon-#{$size} {
+    font-size: $size;
+    height: $size;
+    width: $size;
+  }
+}
 
 
 ```
+
+
+## With Maps
 
 ```SCSS
 
