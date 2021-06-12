@@ -1984,11 +1984,29 @@ $sizes: 40px, 50px, 80px;
 
 ## With Maps
 
+You can also use @each to iterate over every key/value pair in a map by writing it @each <variable>, <variable> in <expression> { ... }. The key is assigned to the first variable name, and the element is assigned to the second.
+
 ```SCSS
+
+$icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
+
+@each $name, $glyph in $icons {
+  .icon-#{$name}:before {
+    display: inline-block;
+    font-family: "Icon Font";
+    content: $glyph;
+  }
+}
 
 
 
 ```
+
+## Destructuring
+
+
+
+
 
 ```SCSS
 
