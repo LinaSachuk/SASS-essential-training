@@ -2004,15 +2004,30 @@ $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
 
 ## Destructuring
 
-
-
+If you have a list of lists, you can use @each to automatically assign variables to each of the values from the inner lists by writing it @each <variable...> in <expression> { ... }. This is known as destructuring, since the variables match the structure of the inner lists. Each variable name is assigned to the value at the corresponding position in the list, or null if the list doesn’t have enough values.
 
 
 ```SCSS
 
+$icons:
+  "eye" "\f112" 12px,
+  "start" "\f12e" 16px,
+  "stop" "\f12f" 10px;
+
+@each $name, $glyph, $size in $icons {
+  .icon-#{$name}:before {
+    display: inline-block;
+    font-family: "Icon Font";
+    content: $glyph;
+    font-size: $size;
+  }
+}
 
 
 ```
+--- 
+
+# @for
 
 
 ```SCSS
