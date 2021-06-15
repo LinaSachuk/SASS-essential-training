@@ -2045,16 +2045,35 @@ $base-color: #036;
 
 
 ```
+
 --- 
 
 # @while
 
+The @while rule, written @while <expression> { ... }, evaluates its block if its expression returns true. Then, if its expression still returns true, it evaluates its block again. This continues until the expression finally returns false.
 
 ```SCSS
 
+@use "sass:math";
 
+/// Divides `$value` by `$ratio` until it's below `$base`.
+@function scale-below($value, $base, $ratio: 1.618) {
+  @while $value > $base {
+    $value: math.div($value, $ratio);
+  }
+  @return $value;
+}
+
+$normal-font-size: 16px;
+sup {
+  font-size: scale-below(20px, 16px);
+}
 
 ```
+
+## Truthiness and Falsiness 
+
+
 
 ```SCSS
 
