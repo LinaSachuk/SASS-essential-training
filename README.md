@@ -2105,20 +2105,43 @@ Sass supports all the at-rules that are part of CSS proper. To stay flexible and
 
 ```
  ## @media
- 
 
+The @media rule does all of the above and more. In addition to allowing interpolation, it allows SassScript expressions to be used directly in the feature queries.
 
 ```SCSS
 
+$layout-breakpoint-small: 960px;
+
+@media (min-width: $layout-breakpoint-small) {
+  .hide-extra-small {
+    display: none;
+  }
+}
+
+```
+
+When possible, Sass will also merge media queries that are nested within one another to make it easier to support browsers that don’t yet natively support nested @media rules.
+
+```SCSS
+
+@media (hover: hover) {
+  .button:hover {
+    border: 2px solid black;
+
+    @media (color) {
+      border-color: #036;
+    }
+  }
+}
 
 
 ```
 
-```SCSS
+--- 
+
+## @supports
 
 
-
-```
 
 ```SCSS
 
