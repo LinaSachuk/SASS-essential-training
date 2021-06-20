@@ -2141,13 +2141,26 @@ When possible, Sass will also merge media queries that are nested within one ano
 
 ## @supports
 
+The @supports rule also allows SassScript expressions to be used in the declaration queries.
 
 
 ```SCSS
 
+@mixin sticky-position {
+  position: fixed;
+  @supports (position: sticky) {
+    position: sticky;
+  }
+}
 
+.banner {
+  @include sticky-position;
+}
 
 ```
+
+## @keyframes
+
 
 ```SCSS
 
