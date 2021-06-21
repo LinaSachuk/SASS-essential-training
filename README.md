@@ -2161,14 +2161,31 @@ The @supports rule also allows SassScript expressions to be used in the declarat
 
 ## @keyframes
 
+The @keyframes rule works just like a general at-rule, except that its child rules must be valid keyframe rules (<number>%, from, or to) rather than normal selectors.
 
 ```SCSS
 
+@keyframes slide-in {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
 
+  70% {
+    margin-left: 90%;
+    width: 150%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
 
 ```
 
-
+--- 
+# Values
 
 
 ```SCSS
