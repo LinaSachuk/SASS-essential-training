@@ -2185,14 +2185,21 @@ The @keyframes rule works just like a general at-rule, except that its child rul
 ```
 
 --- 
-# Values
+# Numbers
 
+Numbers in Sass have two components: the number itself, and its units. For example, in 16px the number is 16 and the unit is px. Numbers can have no units, and they can have complex units. See Units below for more details.
 
 ```SCSS
 
-
+@debug 100; // 100
+@debug 0.8; // 0.8
+@debug 16px; // 16px
+@debug 5px * 2px; // 10px*px (read "square pixels")
 
 ```
+
+## Units
+
 
 ```SCSS
 
