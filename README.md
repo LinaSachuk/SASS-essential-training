@@ -2200,12 +2200,25 @@ Numbers in Sass have two components: the number itself, and its units. For examp
 
 ## Units
 
+Sass has powerful support for manipulating units based on how real-world unit calculations work. When two numbers are multiplied, their units are multiplied as well. When one number is divided by another, the result takes its numerator units from the first number and its denominator units from the second. A number can have any number of units in the numerator and/or denominator.
 
 ```SCSS
 
+@debug 4px * 6px; // 24px*px (read "square pixels")
+@debug math.div(5px, 2s); // 2.5px/s (read "pixels per second")
 
+// 3.125px*deg/s*em (read "pixel-degrees per second-em")
+@debug 5px * math.div(math.div(30deg, 2s), 24em); 
+
+$degrees-per-second: math.div(20deg, 1s);
+@debug $degrees-per-second; // 20deg/s
+@debug math.div(1, $degrees-per-second); // 0.05s/deg
 
 ```
+
+## Precision 
+
+
 
 ```SCSS
 
