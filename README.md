@@ -2238,13 +2238,22 @@ If a number is less than 0.0000000001 away from an integer, it’s considered to
 
 # Strings
 
+Strings are sequences of characters (specifically Unicode code points). Sass supports two kinds of strings whose internal structure is the same but which are rendered differently: quoted strings, like "Helvetica Neue", and unquoted strings (also known as identifiers), like bold. Together, these cover the different kinds of text that appear in CSS.
+
+You can convert a quoted string to an unquoted string using the string.unquote() function, and you can convert an unquoted string to a quoted string using the string.quote() function.
+
 ```SCSS
 
+@use "sass:string";
 
+@debug string.unquote(".widget:hover"); // .widget:hover
+@debug string.quote(bold); // "bold"
 
 ```
 
+--- 
 
+## Escapes
 
 
 ```SCSS
