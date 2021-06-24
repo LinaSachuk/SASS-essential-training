@@ -2218,13 +2218,25 @@ $degrees-per-second: math.div(20deg, 1s);
 
 ## Precision 
 
+Sass numbers support up to 10 digits of precision after the decimal point. This means a few different things:
+
+Only the first ten digits of a number after the decimal point will be included in the generated CSS.
+
+Operations like == and >= will consider two numbers equivalent if they’re the same up to the tenth digit after the decimal point.
+
+If a number is less than 0.0000000001 away from an integer, it’s considered to be an integer for the purposes of functions like list.nth() that require integer arguments.
 
 
 ```SCSS
 
-
+@debug 0.012345678912345; // 0.0123456789
+@debug 0.01234567891 == 0.01234567899; // true
+@debug 1.00000000009; // 1
+@debug 0.99999999991; // 1
 
 ```
+
+# Strings
 
 ```SCSS
 
