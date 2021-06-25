@@ -2255,12 +2255,23 @@ You can convert a quoted string to an unquoted string using the string.unquote()
 
 ## Escapes
 
+All Sass strings support the standard CSS escape codes:
+
+Any character other than a letter from A to F or a number from 0 to 9 (even a newline!) can be included as part of a string by writing \ in front of it.
+
+Any character can be included as part of a string by writing \ followed by its Unicode code point number written in hexadecimal. You can optionally include a space after the code point number to indicate where the Unicode number ends.
 
 ```SCSS
 
-
+@debug "\""; // '"'
+@debug \.widget; // \.widget
+@debug "\a"; // "\a" (a string containing only a newline)
+@debug "line1\a line2"; // "line1\a line2"
+@debug "Nat + Liz \1F46D"; // "Nat + Liz 👭"
 
 ```
+
+## Quoted 
 
 ```SCSS
 
