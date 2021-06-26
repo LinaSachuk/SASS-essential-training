@@ -2273,11 +2273,28 @@ Any character can be included as part of a string by writing \ followed by its U
 
 ## Quoted 
 
+Quoted strings are written between either single or double quotes, as in "Helvetica Neue". They can contain interpolation, as well as any unescaped character except for:
+
+\, which can be escaped as \\;
+' or ", whichever was used to define that string, which can be escaped as \' or \";
+newlines, which can be escaped as \a (including a trailing space).
+Quoted strings are guaranteed to be compiled to CSS strings that have the same contents as the original Sass strings. The exact format may vary based on the implementation or configuration—a string containing a double quote may be compiled to "\"" or '"', and a non-ASCII character may or may not be escaped. But that should be parsed the same in any standards-compliant CSS implementation, including all browsers.
+
 ```SCSS
 
+@debug "Helvetica Neue"; // "Helvetica Neue"
+@debug "C:\\Program Files"; // "C:\\Program Files"
+@debug "\"Don't Fear the Reaper\""; // "\"Don't Fear the Reaper\""
+@debug "line1\a line2"; // "line1\a line2"
 
+$roboto-variant: "Mono";
+@debug "Roboto #{$roboto-variant}"; // "Roboto Mono"
 
 ```
+
+## Unquoted
+
+
 
 ```SCSS
 
