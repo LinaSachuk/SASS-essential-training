@@ -2292,15 +2292,25 @@ $roboto-variant: "Mono";
 
 ```
 
-## Unquoted
+## String Indexes 
 
-
+Sass has a number of string functions that take or return numbers, called indexes, that refer to the characters in a string. The index 1 indicates the first character of the string. Note that this is different than many programming languages where indexes start at 0! Sass also makes it easy to refer to the end of a string. The index -1 refers to the last character in a string, -2 refers to the second-to-last, and so on.
 
 ```SCSS
 
+@use "sass:string";
 
+@debug string.index("Helvetica Neue", "Helvetica"); // 1
+@debug string.index("Helvetica Neue", "Neue"); // 11
+@debug string.slice("Roboto Mono", -4); // "Mono"
 
 ```
+
+
+
+# Colors
+
+
 
 ```SCSS
 
