@@ -2342,6 +2342,11 @@ $venus: #998099;
 
 # Lists
 
+Lists contain a sequence of other values. In Sass, elements in lists can be separated by commas (Helvetica, Arial, sans-serif), spaces (10px 15px 0 0), or slashes as long as it’s consistent within the list. Unlike most other languages, lists in Sass don’t require special brackets; any expressions separated with spaces or commas count as a list. However, you’re allowed to write lists with square brackets ([line1 line2]), which is useful when using grid-template-columns.
+
+Sass lists can contain one or even zero elements. A single-element list can be written either (<expression>,) or [<expression>], and a zero-element list can be written either () or []. Also, all list functions will treat individual values that aren’t in lists as though they’re lists containing that value, which means you rarely need to explicitly create single-element lists.
+
+## Slash-Separated Lists
 
 
 ```SCSS
