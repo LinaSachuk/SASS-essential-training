@@ -2348,6 +2348,11 @@ Sass lists can contain one or even zero elements. A single-element list can be w
 
 ## Slash-Separated Lists
 
+Lists in Sass can be separated by slashes, to represent values like the font: 12px/30px shorthand for setting font-size and line-height or the hsl(80 100% 50% / 0.5) syntax for creating a color with a given opacity value. However, slash-separated lists can’t currently be written literally. Sass historically used the / character to indicate division, so while existing stylesheets transition to using math.div() slash-separated lists can only be written using list.slash().
+
+
+## Using Lists
+
 
 ```SCSS
 
