@@ -2353,12 +2353,20 @@ Lists in Sass can be separated by slashes, to represent values like the font: 12
 
 ## Using Lists
 
+Many of these functions take or return numbers, called indexes, that refer to the elements in a list. The index 1 indicates the first element of the list. Note that this is different than many programming languages where indexes start at 0! Sass also makes it easy to refer to the end of a list. The index -1 refers to the last element in a list, -2 refers to the second-to-last, and so on.
+
+Access an Element permalinkAccess an Element
+Lists aren’t much use if you can’t get values out of them. You can use the list.nth($list, $n) function to get the element at a given index in a list. The first argument is the list itself, and the second is the index of the value you want to get out.
 
 ```SCSS
 
-
+@debug list.nth(10px 12px 16px, 2); // 12px
+@debug list.nth([line1, line2, line3], -1); // line3
 
 ```
+
+### Do Something for Every Element
+
 
 ```SCSS
 
