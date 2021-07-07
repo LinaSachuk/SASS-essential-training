@@ -2367,12 +2367,27 @@ Lists aren’t much use if you can’t get values out of them. You can use the l
 
 ### Do Something for Every Element
 
+This doesn’t actually use a function, but it’s still one of the most common ways to use lists. The @each rule evaluates a block of styles for each element in a list, and assigns that element to a variable.
 
 ```SCSS
 
+$sizes: 40px, 50px, 80px;
+
+@each $size in $sizes {
+  .icon-#{$size} {
+    font-size: $size;
+    height: $size;
+    width: $size;
+  }
+}
 
 
 ```
+
+### Add to a List 
+
+
+
 
 ```SCSS
 
