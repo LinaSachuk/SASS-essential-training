@@ -2386,15 +2386,17 @@ $sizes: 40px, 50px, 80px;
 
 ### Add to a List 
 
-
+It’s also useful to add elements to a list. The list.append($list, $val) function takes a list and a value, and returns a copy of the list with the value added to the end. Note that because Sass lists are immutable, it doesn’t modify the original list.
 
 
 ```SCSS
 
-
+@debug append(10px 12px 16px, 25px); // 10px 12px 16px 25px
+@debug append([col1-line1], col1-line2); // [col1-line1, col1-line2]
 
 ```
 
+### Find an Element in a List
 
 
 
