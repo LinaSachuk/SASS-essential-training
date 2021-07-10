@@ -2398,19 +2398,40 @@ It’s also useful to add elements to a list. The list.append($list, $val) funct
 
 ### Find an Element in a List
 
+If you need to check if an element is in a list or figure out what index it’s at, use the list.index($list, $value) function. This takes a list and a value to locate in that list, and returns the index of that value.
+
+```SCSS
+
+@debug list.index(1px solid red, 1px); // 1
+@debug list.index(1px solid red, solid); // 2
+@debug list.index(1px solid red, dashed); // null
+
+```
+
+If the value isn’t in the list at all, list.index() returns null. Because null is falsey, you can use list.index() with @if or if() to check whether a list does or doesn’t contain a given value.
 
 
 ```SCSS
 
+@use "sass:list";
 
+$valid-sides: top, bottom, left, right;
+
+@mixin attach($side) {
+  @if not list.index($valid-sides, $side) {
+    @error "#{$side} is not a valid side. Expected one of #{$valid-sides}.";
+  }
+
+  // ...
+}
 
 ```
 
-```SCSS
+## Immutability
 
 
 
-```
+
 
 ```SCSS
 
