@@ -2429,15 +2429,32 @@ $valid-sides: top, bottom, left, right;
 
 ## Immutability
 
+Lists in Sass are immutable, which means that the contents of a list value never changes. Sass’s list functions all return new lists rather than modifying the originals. Immutability helps avoid lots of sneaky bugs that can creep in when the same list is shared across different parts of the stylesheet.
 
-
-
+You can still update your state over time by assigning new lists to the same variable, though. This is often used in functions and mixins to collect a bunch of values into one list.
 
 ```SCSS
 
+@use "sass:list";
+@use "sass:map";
 
+$prefixes-by-browser: ("firefox": moz, "safari": webkit, "ie": ms);
+
+@function prefixes-for-browsers($browsers) {
+  $prefixes: ();
+  @each $browser in $browsers {
+    $prefixes: list.append($prefixes, map.get($prefixes-by-browser, $browser));
+  }
+  @return $prefixes;
+}
+
+@debug prefixes-for-browsers("firefox" "ie"); // moz ms
 
 ```
+
+## Argument Lists
+
+
 
 ```SCSS
 
