@@ -2454,14 +2454,34 @@ $prefixes-by-browser: ("firefox": moz, "safari": webkit, "ie": ms);
 
 ## Argument Lists
 
-
+When you declare a mixin or function that takes arbitrary arguments, the value you get is a special list known as an argument list. It acts just like a list that contains all the arguments passed to the mixin or function, with one extra feature: if the user passed keyword arguments, they can be accessed as a map by passing the argument list to the meta.keywords() function.
 
 ```SCSS
 
+@use "sass:meta";
 
+@mixin syntax-colors($args...) {
+  @debug meta.keywords($args);
+  // (string: #080, comment: #800, variable: #60b)
+
+  @each $name, $color in meta.keywords($args) {
+    pre span.stx-#{$name} {
+      color: $color;
+    }
+  }
+}
+
+@include syntax-colors(
+  $string: #080,
+  $comment: #800,
+  $variable: #60b,
+)
 
 ```
 
+---
+
+# Maps
 
 
 ```SCSS
