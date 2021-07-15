@@ -2483,6 +2483,11 @@ When you declare a mixin or function that takes arbitrary arguments, the value y
 
 # Maps
 
+Maps in Sass hold pairs of keys and values, and make it easy to look up a value by its corresponding key. They’re written (<expression>: <expression>, <expression>: <expression>). The expression before the : is the key, and the expression after is the value associated with that key. The keys must be unique, but the values may be duplicated. Unlike lists, maps must be written with parentheses around them. A map with no pairs is written ().
+Maps allow any Sass values to be used as their keys. The == operator is used to determine whether two keys are the same.
+
+## Using Maps
+
 
 ```SCSS
 
