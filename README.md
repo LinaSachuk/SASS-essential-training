@@ -2488,12 +2488,23 @@ Maps allow any Sass values to be used as their keys. The == operator is used to 
 
 ## Using Maps
 
+Since maps aren’t valid CSS values, they don’t do much of anything on their own. That’s why Sass provides a bunch of functions to create maps and access the values they contain.
+
+### Look Up a Value
+
+Maps are all about associating keys and values, so naturally there’s a way to get the value associated with a key: the map.get($map, $key) function! This function returns the value in the map associated with the given key. It returns null if the map doesn’t contain the key.
 
 ```SCSS
 
+$font-weights: ("regular": 400, "medium": 500, "bold": 700);
 
+@debug map.get($font-weights, "medium"); // 500
+@debug map.get($font-weights, "extra-bold"); // null
 
 ```
+
+### Do Something for Every Pair 
+
 
 ```SCSS
 
