@@ -2505,12 +2505,25 @@ $font-weights: ("regular": 400, "medium": 500, "bold": 700);
 
 ### Do Something for Every Pair 
 
+This doesn’t actually use a function, but it’s still one of the most common ways to use maps. The @each rule evaluates a block of styles for each key/value pair in a map. The key and the value are assigned to variables so they can easily be accessed in the block.
 
 ```SCSS
 
+$icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
 
+@each $name, $glyph in $icons {
+  .icon-#{$name}:before {
+    display: inline-block;
+    font-family: "Icon Font";
+    content: $glyph;
+  }
+}
 
 ```
+
+### Add to a Map
+
+
 
 ```SCSS
 
