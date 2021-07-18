@@ -2523,27 +2523,61 @@ $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
 
 ### Add to a Map
 
-
-
-```SCSS
-
-
-
-```
+It’s also useful to add new pairs to a map, or to replace the value for an existing key. The map.set($map, $key, $value) function does this: it returns a copy of $map with the value at $key set to $value.
 
 ```SCSS
 
+@use "sass:map";
 
+$font-weights: ("regular": 400, "medium": 500, "bold": 700);
+
+@debug map.set($font-weights, "extra-bold", 900);
+// ("regular": 400, "medium": 500, "bold": 700, "extra-bold": 900)
+@debug map.set($font-weights, "bold", 900);
+// ("regular": 400, "medium": 500, "bold": 900)
 
 ```
 
-
+Instead of setting values one-by-one, you can also merge two existing maps using [map.merge($map1, $map2)][].
 
 ```SCSS
 
+@use "sass:map";
 
+$light-weights: ("lightest": 100, "light": 300);
+$heavy-weights: ("medium": 500, "bold": 700);
+
+@debug map.merge($light-weights, $heavy-weights);
+// ("lightest": 100, "light": 300, "medium": 500, "bold": 700)
 
 ```
+
+### Immutability
+
+Maps in Sass are immutable, which means that the contents of a map value never changes. Sass’s map functions all return new maps rather than modifying the originals. Immutability helps avoid lots of sneaky bugs that can creep in when the same map is shared across different parts of the stylesheet.
+
+You can still update your state over time by assigning new maps to the same variable, though. This is often used in functions and mixins to track configuration in a map.
+
+```SCSS
+
+@use "sass:map";
+
+$prefixes-by-browser: ("firefox": moz, "safari": webkit, "ie": ms);
+
+@mixin add-browser-prefix($browser, $prefix) {
+  $prefixes-by-browser: map.merge($prefixes-by-browser, ($browser: $prefix)) !global;
+}
+
+@include add-browser-prefix("opera", o);
+@debug $prefixes-by-browser;
+// ("firefox": moz, "safari": webkit, "ie": ms, "opera": o)
+
+```
+
+---
+
+# Booleans
+
 
 ```SCSS
 
