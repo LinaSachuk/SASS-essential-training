@@ -2578,18 +2578,37 @@ $prefixes-by-browser: ("firefox": moz, "safari": webkit, "ie": ms);
 
 # Booleans
 
+Booleans are the logical values true and false. In addition their literal forms, booleans are returned by equality and relational operators, as well as many built-in functions like math.comparable() and map.has-key().
 
 ```SCSS
 
+@use "sass:math";
 
+@debug 1px == 2px; // false
+@debug 1px == 1px; // true
+@debug 10px < 3px; // false
+@debug math.comparable(100px, 3in); // true
 
 ```
+
+You can work with booleans using boolean operators. The and operator returns true if both sides are true, and the or operator returns true if either side is true. The not operator returns the opposite of a single boolean value.
 
 ```SCSS
 
+@debug true and true; // true
+@debug true and false; // false
 
+@debug true or false; // true
+@debug false or false; // false
+
+@debug not true; // false
+@debug not false; // true
 
 ```
+
+## Using Booleans
+
+
 
 ```SCSS
 
