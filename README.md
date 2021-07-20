@@ -2608,21 +2608,42 @@ You can work with booleans using boolean operators. The and operator returns tru
 
 ## Using Booleans
 
-
+You can use booleans to choose whether or not to do various things in Sass. The @if rule evaluates a block of styles if its argument is true:
 
 ```SCSS
 
+@mixin avatar($size, $circle: false) {
+  width: $size;
+  height: $size;
+
+  @if $circle {
+    border-radius: $size / 2;
+  }
+}
+
+.square-av {
+  @include avatar(100px, $circle: false);
+}
+.circle-av {
+  @include avatar(100px, $circle: true);
+}
 
 
 ```
 
+The if() function returns one value if its argument is true and another if its argument is false:
 
 
 ```SCSS
 
-
+@debug if(true, 10px, 30px); // 10px
+@debug if(false, 10px, 30px); // 30px
 
 ```
+
+## Truthiness and Falsiness
+
+
 
 ```SCSS
 
