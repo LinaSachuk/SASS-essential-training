@@ -2643,7 +2643,14 @@ The if() function returns one value if its argument is true and another if its a
 
 ## Truthiness and Falsiness
 
+Anywhere true or false are allowed, you can use other values as well. The values false and null are falsey, which means Sass considers them to indicate falsehood and cause conditions to fail. Every other value is considered truthy, so Sass considers them to work like true and cause conditions to succeed.
 
+For example, if you want to check if a string contains a space, you can just write string.index($string, " "). The string.index() function returns null if the string isn’t found and a number otherwise.
+
+---
+
+
+# null
 
 ```SCSS
 
