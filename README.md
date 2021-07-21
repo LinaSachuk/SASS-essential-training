@@ -2652,32 +2652,71 @@ For example, if you want to check if a string contains a space, you can just wri
 
 # null
 
-```SCSS
-
-
-
-```
+The value null is the only value of its type. It represents the absence of a value, and is often returned by functions to indicate the lack of a result.
 
 ```SCSS
 
+@use "sass:map";
+@use "sass:string";
 
+@debug string.index("Helvetica Neue", "Roboto"); // null
+@debug map.get(("large": 20px), "small"); // null
+@debug &; // null
 
 ```
+
+If a list contains a null, that null is omitted from the generated CSS.
 
 ```SCSS
 
+$fonts: ("serif": "Helvetica Neue", "monospace": "Consolas");
 
+h3 {
+  font: 18px bold map-get($fonts, "sans");
+}
 
 ```
 
+If a property value is null, that property is omitted entirely.
+
+```SCSS
+
+$fonts: ("serif": "Helvetica Neue", "monospace": "Consolas");
+
+h3 {
+  font: {
+    size: 18px;
+    weight: bold;
+    family: map-get($fonts, "sans");
+  }
+}
+
+```
+
+null is also falsey, which means it counts as false for any rules or operators that take booleans. This makes it easy to use values that can be null as conditions for @if and if().
 
 
 
 ```SCSS
 
+@mixin app-background($color) {
+  #{if(&, '&.app-background', '.app-background')} {
+    background-color: $color;
+    color: rgba(#fff, 0.75);
+  }
+}
 
+@include app-background(#036);
+
+.sidebar {
+  @include app-background(#c6538c);
+}
 
 ```
+
+---
+
+# Functions
 
 ```SCSS
 
