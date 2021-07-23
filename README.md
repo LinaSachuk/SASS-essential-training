@@ -2718,11 +2718,45 @@ null is also falsey, which means it counts as false for any rules or operators t
 
 # Functions
 
+Functions can be values too! You can’t directly write a function as a value, but you can pass a function’s name to the [meta.get-function() function][] to get it as a value. Once you have a function value, you can pass it to the meta.call() function to call it. This is useful for writing higher-order functions that call other functions.
+
 ```SCSS
 
+@use "sass:list";
+@use "sass:meta";
+@use "sass:string";
 
+/// Return a copy of $list with all elements for which $condition returns `true`
+/// removed.
+@function remove-where($list, $condition) {
+  $new-list: ();
+  $separator: list.separator($list);
+  @each $element in $list {
+    @if not meta.call($condition, $element) {
+      $new-list: list.append($new-list, $element, $separator: $separator);
+    }
+  }
+  @return $new-list;
+}
+
+$fonts: Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+content {
+  @function contains-helvetica($string) {
+    @return string.index($string, "Helvetica");
+  }
+  font-family: remove-where($fonts, meta.get-function("contains-helvetica"));
+}
 
 ```
+
+--- 
+
+# Operators
+
+
+
+
 
 ```SCSS
 
