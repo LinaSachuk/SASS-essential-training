@@ -2768,12 +2768,32 @@ and, or, and not have the usual boolean behavior. Sass considers every value “
 
 ## Order of Operations
 
+Sass has a pretty standard order of operations, from tightest to loosest:
+
+The unary operators not, +, -, and /.
+
+The *, /, and % operators.
+
+The + and - operators.
+
+The >, >=, < and <= operators.
+
+The == and != operators.
+
+The and operator.
+
+The or operator.
+
+The = operator, when it’s available.
 
 ```SCSS
 
-
+@debug 1 + 2 * 3 == 1 + (2 * 3); // true
+@debug true or false and false == true or (false and false); // true
 
 ```
+
+## Parentheses
 
 ```SCSS
 
