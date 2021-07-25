@@ -2795,12 +2795,16 @@ The = operator, when it’s available.
 
 ## Parentheses
 
+You can explicitly control the order of operations using parentheses. An operation inside parentheses is always evaluated before any operations outside of them. Parentheses can even be nested, in which case the innermost parentheses will be evaluated first.
+
 ```SCSS
 
-
+@debug (1 + 2) * 3; // 9
+@debug ((1 + 2) * 3 + 4) * 5; // 65
 
 ```
-
+ ## Single Equals
+ 
 
 
 ```SCSS
