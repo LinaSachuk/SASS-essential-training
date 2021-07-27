@@ -2902,27 +2902,42 @@ The sass:meta module exposes the details of Sass’s inner workings.
 
 ## Global Functions
 
+```SCSS
+
+hsl($hue $saturation $lightness)
+hsl($hue $saturation $lightness / $alpha)
+hsl($hue, $saturation, $lightness, $alpha: 1)
+hsla($hue $saturation $lightness)
+hsla($hue $saturation $lightness / $alpha)
+hsla($hue, $saturation, $lightness, $alpha: 1) //=> color 
+
+```
+
+Returns a color with the given hue, saturation, and lightness and the given alpha channel.
+
+The hue is a number between 0deg and 360deg (inclusive) and may be unitless. The saturation and lightness are numbers between 0% and 100% (inclusive) and may not be unitless. The alpha channel can be specified as either a unitless number between 0 and 1 (inclusive), or a percentage between 0% and 100% (inclusive).
 
 
 ```SCSS
 
-
+if($condition, $if-true, $if-false) 
 
 ```
 
+Returns $if-true if $condition is truthy, and $if-false otherwise.
 
+This function is special in that it doesn’t even evaluate the argument that isn’t returned, so it’s safe to call even if the unused argument would throw an error.
 
 ```SCSS
 
-
-
-```
-
-```SCSS
-
-
+@debug if(true, 10px, 15px); // 10px
+@debug if(false, 10px, 15px); // 15px
+@debug if(variable-defined($var), $var, null); // null
 
 ```
+
+## sass:color
+
 
 ```SCSS
 
