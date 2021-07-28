@@ -2941,16 +2941,30 @@ This function is special in that it doesn’t even evaluate the argument that is
 
 ```SCSS
 
-
+color.adjust($color,
+  $red: null, $green: null, $blue: null,
+  $hue: null, $saturation: null, $lightness: null,
+  $whiteness: null, $blackness: null,
+  $alpha: null)
+adjust-color(...) //=> color 
 
 ```
+
+Increases or decreases one or more properties of $color by fixed amounts.
+
+Adds the value passed for each keyword argument to the corresponding property of the color, and returns the adjusted color. It’s an error to specify an RGB property ($red, $green, and/or $blue) at the same time as an HSL property ($hue, $saturation, and/or $lightness), or either of those at the same time as an HWB property ($hue, $whiteness, and/or $blackness).
+
+All optional arguments must be numbers. The $red, $green, and $blue arguments must be unitless and between -255 and 255 (inclusive). The $hue argument must have either the unit deg or no unit. The $saturation, $lightness, $whiteness, and $blackness arguments must be between -100% and 100% (inclusive), and may not be unitless. The $alpha argument must be unitless and between -1 and 1 (inclusive).
 
 ```SCSS
 
-
+@debug color.adjust(#6b717f, $red: 15); // #7a717f
+@debug color.adjust(#d2e1dd, $red: -10, $blue: 10); // #c8e1e7
+@debug color.adjust(#998099, $lightness: -30%, $alpha: -0.4); // rgba(71, 57, 71, 0.6)
 
 ```
 
+## sass:list
 
 
 
