@@ -2996,13 +2996,19 @@ Note that unlike list.join(), if $val is a list it’s nested within the returne
 
 ## sass:map
 
+Sass libraries and design systems tend to share and override configurations that are represented as nested maps (maps that contain maps that contain maps).
 
+To help you work with nested maps, some map functions support deep operations. For example, if you pass multiple keys to map.get(), it will follow those keys to find the desired nested map:
 
 ```SCSS
 
-
+$config: (a: (b: (c: d)));
+@debug map.get($config, a, b, c); // d
 
 ```
+
+## sass:math
+
 
 ```SCSS
 
