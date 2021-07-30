@@ -2966,19 +2966,37 @@ All optional arguments must be numbers. The $red, $green, and $blue arguments mu
 
 ## sass:list
 
+In Sass, every map counts as a list that contains a two-element list for each key/value pair. For example, (1: 2, 3: 4) counts as (1 2, 3 4). So all these functions work for maps as well!
 
-
-```SCSS
-
-
-
-```
+Individual values also count as lists. All these functions treat 1px as a list that contains the value 1px.
 
 ```SCSS
 
-
+list.append($list, $val, $separator: auto)
+append($list, $val, $separator: auto) //=> list 
 
 ```
+
+Returns a copy of $list with $val added to the end.
+
+If $separator is comma, space, or slash, the returned list is comma-separated, space-separated, or slash-separated, respectively. If it’s auto (the default), the returned list will use the same separator as $list (or space if $list doesn’t have a separator). Other values aren’t allowed.
+
+Note that unlike list.join(), if $val is a list it’s nested within the returned list rather than having all its elements added to the returned list.
+
+```SCSS
+
+@debug list.append(10px 20px, 30px); // 10px 20px 30px
+@debug list.append((blue, red), green); // blue, red, green
+@debug list.append(10px 20px, 30px 40px); // 10px 20px (30px 40px)
+@debug list.append(10px, 20px, $separator: comma); // 10px, 20px
+@debug list.append((blue, red), green, $separator: space); // blue red green
+
+```
+
+
+## sass:map
+
+
 
 ```SCSS
 
