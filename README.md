@@ -3007,89 +3007,120 @@ $config: (a: (b: (c: d)));
 
 ```
 
-## sass:math
-
+# sass:math
+## Variables
 
 ```SCSS
 
+@debug math.$e; // 2.7182818285@debug 
+math.$pi; // 3.1415926536
 
 
 ```
 
+## Bounding Functions
 
-
-
-```SCSS
-
-
-
-```
+Rounds $number up to the next highest whole number.
 
 ```SCSS
 
-
-
-```
-
-```SCSS
-
-
+math.ceil($number)
+ceil($number) //=> number 
 
 ```
 
 ```SCSS
 
-
+math.clamp($min, $number, $max) //=> number 
 
 ```
 
+Restricts $number to the range between $min and $max. If $number is less than $min this returns $min, and if it’s greater than $max this returns $max.
+
+$min, $number, and $max must have compatible units, or all be unitless.
+
+```SCSS
+
+@debug math.clamp(-1, 0, 1); // 0
+@debug math.clamp(1px, -1px, 10px); // 1px
+@debug math.clamp(-1in, 1cm, 10mm); // 10mm
+
+```
 
 
 
 ```SCSS
 
+math.floor($number)
+floor($number) //=> number 
 
+```
+
+Rounds $number down to the next lowest whole number.
+
+```SCSS
+
+@debug math.floor(4); // 4
+@debug math.floor(4.2); // 4
+@debug math.floor(4.9); // 4
+
+```
+
+
+```SCSS
+
+math.max($number...)
+max($number...) //=> number 
+
+```
+
+Returns the highest of one or more numbers.
+
+```SCSS
+
+@debug math.max(1px, 4px); // 4px
+
+$widths: 50px, 30px, 100px;
+@debug math.max($widths...); // 100px
 
 ```
 
 ```SCSS
 
+math.min($number...)
+min($number...) //=> number 
 
+```
+
+Returns the lowest of one or more numbers.
+
+```SCSS
+
+@debug math.min(1px, 4px); // 1px
+
+$widths: 50px, 30px, 100px;
+@debug math.min($widths...); // 30px
 
 ```
 
 ```SCSS
 
-
+math.round($number)
+round($number) //=> number 
 
 ```
+
+Rounds $number to the nearest whole number.
 
 ```SCSS
 
-
-
-```
-
-
-
-
-```SCSS
-
-
+@debug math.round(4); // 4
+@debug math.round(4.2); // 4
+@debug math.round(4.9); // 5
 
 ```
 
-```SCSS
-
-
-
-```
-
-```SCSS
-
-
-
-```
+## Distance Functions
 
 ```SCSS
 
