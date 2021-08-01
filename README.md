@@ -3124,30 +3124,42 @@ Rounds $number to the nearest whole number.
 
 ```SCSS
 
-
+math.abs($number)
+abs($number) //=> number 
 
 ```
 
-
+Returns the absolute value of $number. If $number is negative, this returns -$number, and if $number is positive, it returns $number as-is.
 
 
 ```SCSS
 
-
-
-```
-
-```SCSS
-
-
+@debug math.abs(10px); // 10px
+@debug math.abs(-10px); // 10px
 
 ```
 
 ```SCSS
 
-
+math.hypot($number...) //=> number 
 
 ```
+
+Returns the length of the n-dimensional vector that has components equal to each $number. For example, for three numbers a, b, and c, this returns the square root of a² + b² + c².
+
+The numbers must either all have compatible units, or all be unitless. And since the numbers’ units may differ, the output takes the unit of the first number.
+
+```SCSS
+
+@debug math.hypot(3, 4); // 5
+
+$lengths: 1in, 10cm, 50px;
+@debug math.hypot($lengths...); // 4.0952775683in
+
+```
+
+## Exponential Functions
+
 
 ```SCSS
 
