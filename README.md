@@ -3218,73 +3218,132 @@ $number must be unitless.
 
 ```SCSS
 
+math.cos($number) //=> number 
+
+```
+
+Returns the cosine of $number.
+
+$number must be an angle (its units must be compatible with deg) or unitless. If $number has no units, it is assumed to be in rad.
+
+
+```SCSS
+
+@debug math.cos(100deg); // -0.1736481777
+@debug math.cos(1rad); // 0.5403023059
+@debug math.cos(1); // 0.5403023059
 
 ```
 
 ```SCSS
 
+math.sin($number) //=> number 
+
+```
+
+Returns the sine of $number.
+
+$number must be an angle (its units must be compatible with deg) or unitless. If $number has no units, it is assumed to be in rad.
+
+```SCSS
+
+@debug math.sin(100deg); // 0.984807753
+@debug math.sin(1rad); // 0.8414709848
+@debug math.sin(1); // 0.8414709848
 
 ```
 
 ```SCSS
 
+math.tan($number) //=> number 
+
+```
+
+Returns the tangent of $number.
+
+$number must be an angle (its units must be compatible with deg) or unitless. If $number has no units, it is assumed to be in rad.
+
+```SCSS
+
+@debug math.tan(100deg); // -5.6712818196
+@debug math.tan(1rad); // 1.5574077247
+@debug math.tan(1); // 1.5574077247
 
 ```
 
 ```SCSS
 
+math.acos($number) //=> number 
+
+```
+
+Returns the arccosine of $number in deg.
+
+$number must be unitless.
+
+```SCSS
+
+@debug math.acos(0.5); // 60deg
+@debug math.acos(2); // NaNdeg
+
+```
+
+
+
+```SCSS
+
+math.asin($number) //=> number 
+
+```
+
+Returns the arcsine of $number in deg.
+
+$number must be unitless.
+
+```SCSS
+
+@debug math.asin(0.5); // 30deg
+@debug math.asin(2); // NaNdeg
+
+```
+
+Returns the arctangent of $number in deg.
+
+$number must be unitless.
+
+```SCSS
+
+math.atan($number) //=> number 
+
+```
+
+
+
+```SCSS
+
+@debug math.atan(10); // 84.2894068625deg
 
 ```
 
 ```SCSS
 
+math.atan2($y, $x) //=> number 
 
 ```
+
+Returns the 2-argument arctangent of $y and $x in deg.
+
+$y and $x must have compatible units or be unitless.
+
+math.atan2($y, $x) is distinct from atan(math.div($y, $x)) because it preserves the quadrant of the point in question. For example, math.atan2(1, -1) corresponds to the point (-1, 1) and returns 135deg. In contrast, math.atan(math.div(1, -1)) and math.atan(math.div(-1, 1)) resolve first to atan(-1), so both return -45deg.
 
 ```SCSS
 
+@debug math.atan2(-1, 1); // 135deg
 
 ```
 
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
+## Unit Functions
 
 ```SCSS
 
