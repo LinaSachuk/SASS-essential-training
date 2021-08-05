@@ -3346,34 +3346,57 @@ math.atan2($y, $x) is distinct from atan(math.div($y, $x)) because it preserves 
 ## Unit Functions
 
 ```SCSS
-
-
-```
-```SCSS
-
+math.compatible($number1, $number2)
+comparable($number1, $number2) //=> boolean 
 
 ```
 
-```SCSS
+Returns whether $number1 and $number2 have compatible units.
 
+If this returns true, $number1 and $number2 can safely be added, subtracted, and compared. Otherwise, doing so will produce errors.
 
-```
-
-```SCSS
-
-
-```
 
 ```SCSS
 
+@debug math.compatible(2px, 1px); // true
+@debug math.compatible(100px, 3em); // false
+@debug math.compatible(10cm, 3mm); // true
 
 ```
 
 ```SCSS
 
+math.is-unitless($number)
+unitless($number) //=> boolean 
+
+```
+Returns whether $number has no units.
+
+```SCSS
+@debug math.is-unitless(100); // true
+@debug math.is-unitless(100px); // false
 
 ```
 
+
+```SCSS
+math.unit($number)
+unit($number) //=> quoted string 
+
+```
+
+Returns a string representation of $number‘s units.
+
+```SCSS
+
+@debug math.unit(100); // ""
+@debug math.unit(100px); // "px"
+@debug math.unit(5px * 10px); // "px*px"
+@debug math.unit(math.div(5px, 1s)); // "px/s"
+
+```
+
+## Other Functions
 
 ```SCSS
 
