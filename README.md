@@ -3400,38 +3400,66 @@ Returns a string representation of $number‘s units.
 
 ```SCSS
 
+math.div($number1, $number2) //=> number 
+
+```
+Returns the result of dividing $number1 by $number2.
+
+Any units shared by both numbers will be canceled out. Units in $number1 that aren’t in $number2 will end up in the return value’s numerator, and units in $number2 that aren’t in $number1 will end up in its denominator.
+
+```SCSS
+
+@debug math.div(1, 2); // 0.5
+@debug math.div(100px, 5px); // 20
+@debug math.div(100px, 5); // 20px
+@debug math.div(100px, 5s); // 20px/s
 
 ```
 
 ```SCSS
 
+math.percentage($number)
+percentage($number) //=> number 
+
+```
+
+Converts a unitless $number (usually a decimal between 0 and 1) to a percentage.
+
+```SCSS
+
+@debug math.percentage(0.2); // 20%
+@debug math.percentage(math.div(100px, 50px)); // 200%
 
 ```
 
 ```SCSS
 
+math.random($limit: null)
+random($limit: null) //=> number 
 
 ```
+
+If $limit is null, returns a random decimal number between 0 and 1.
 
 ```SCSS
 
+@debug math.random(); // 0.2821251858
+@debug math.random(); // 0.6221325814
 
 ```
+
+If $limit is a number greater than or equal to 1, returns a random whole number between 1 and $limit.
 
 ```SCSS
 
+@debug math.random(10); // 4
+@debug math.random(10000); // 5373
 
 ```
 
-```SCSS
+# sass:meta
+## Mixins
 
-
-```
-
-```SCSS
-
-
-```
 
 ```SCSS
 
