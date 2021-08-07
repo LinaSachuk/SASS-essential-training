@@ -3463,18 +3463,44 @@ If $limit is a number greater than or equal to 1, returns a random whole number 
 
 ```SCSS
 
+meta.load-css($url, $with: null) 
+
+```
+
+Loads the module at $url and includes its CSS as though it were written as the contents of this mixin. The $with parameter provides configuration for the modules; if it’s passed, it must be a map from variable names (without $) to the values of those variables to use in the loaded module.
+
+If $url is relative, it’s interpreted as relative to the file in which meta.load-css() is included.
+
+
+
+```SCSS
+
+// dark-theme/_code.scss
+$border-contrast: false !default;
+
+code {
+  background-color: #6b717f;
+  color: #d2e1dd;
+  @if $border-contrast {
+    border-color: #dadbdf;
+  }
+}
 
 ```
 
 ```SCSS
 
+// style.scss
+@use "sass:meta";
+
+body.dark {
+  @include meta.load-css("dark-theme/code",
+      $with: ("border-contrast": true));
+}
 
 ```
 
-```SCSS
-
-
-```
+## Functions
 
 ```SCSS
 
