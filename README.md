@@ -3503,24 +3503,73 @@ body.dark {
 ## Functions
 
 ```SCSS
+meta.call($function, $args...)
+call($function, $args...) 
 
+```
+Invokes $function with $args and returns the result.
+
+The $function should be a function returned by meta.get-function().
+
+```SCSS
+
+@use "sass:list";
+@use "sass:meta";
+@use "sass:string";
+
+/// Return a copy of $list with all elements for which $condition returns `true`
+/// removed.
+@function remove-where($list, $condition) {
+  $new-list: ();
+  $separator: list.separator($list);
+  @each $element in $list {
+    @if not meta.call($condition, $element) {
+      $new-list: list.append($new-list, $element, $separator: $separator);
+    }
+  }
+  @return $new-list;
+}
+
+$fonts: Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+content {
+  @function contains-helvetica($string) {
+    @return string.index($string, "Helvetica");
+  }
+  font-family: remove-where($fonts, meta.get-function("contains-helvetica"));
+}
 
 ```
 
 ```SCSS
 
+meta.content-exists()
+content-exists() //=> boolean 
 
 ```
+
+Returns whether the current mixin was passed a @content block.
+
+Throws an error if called outside of a mixin.
 
 ```SCSS
 
+@mixin debug-content-exists {
+  @debug meta.content-exists();
+  @content;
+}
+
+@include debug-content-exists; // false
+@include debug-content-exists { // true
+  // Content!
+}
 
 ```
 
-```SCSS
+# sass:selector
 
+## Selector Values
 
-```
 
 ```SCSS
 
