@@ -3570,100 +3570,204 @@ Throws an error if called outside of a mixin.
 
 ## Selector Values
 
+The functions in this module inspect and manipulate selectors. Whenever they return a selector, it’s always a comma-separated list (the selector list) that contains space-separated lists (the complex selectors) that contain unquoted strings (the compound selectors). For example, the selector .main aside:hover, .sidebar p would be returned as:
 
 ```SCSS
 
+@debug ((unquote(".main") unquote("aside:hover")),
+        (unquote(".sidebar") unquote("p")));
+// .main aside:hover, .sidebar p
 
 ```
 
 ```SCSS
 
+Selector arguments to these functions may be in the same format, but they can also just be normal strings (quoted or unquoted), or a combination. For example, ".main aside:hover, .sidebar p" is a valid selector argument.
 
 ```
 
 ```SCSS
 
+selector.is-superselector($super, $sub)
+is-superselector($super, $sub) //=> boolean 
+
+```
+Returns whether the selector $super matches all the elements that the selector $sub matches.
+
+Still returns true even if $super matches more elements than $sub.
+
+The $super and $sub selectors may contain placeholder selectors, but not parent selectors.
+
+```SCSS
+
+@debug selector.is-superselector("a", "a.disabled"); // true
+@debug selector.is-superselector("a.disabled", "a"); // false
+@debug selector.is-superselector("a", "sidebar a"); // true
+@debug selector.is-superselector("sidebar a", "a"); // false
+@debug selector.is-superselector("a", "a"); // true
 
 ```
 
 ```SCSS
 
+selector.append($selectors...)
+selector-append($selectors...) //=> selector 
+
+```
+Combines $selectors without descendant combinators—that is, without whitespace between them.
+
+If any selector in $selectors is a selector list, each complex selector is combined separately.
+
+The $selectors may contain placeholder selectors, but not parent selectors.
+
+See also selector.nest().
+
+```SCSS
+
+@debug selector.append("a", ".disabled"); // a.disabled
+@debug selector.append(".accordion", "__copy"); // .accordion__copy
+@debug selector.append(".accordion", "__copy, __image");
+// .accordion__copy, .accordion__image
 
 ```
 
 ```SCSS
 
+selector.extend($selector, $extendee, $extender)
+selector-extend($selector, $extendee, $extender) //=> selector 
+
+```
+
+Extends $selector as with the @extend rule.
+
+Returns a copy of $selector modified with the following @extend rule:
+
+```SCSS
+
+#{$extender} {
+  @extend #{$extendee};
+}
+
+```
+In other words, replaces all instances of $extendee in $selector with $extendee, $extender. If $selector doesn’t contain $extendee, returns it as-is.
+
+The $selector, $extendee, and $extender selectors may contain placeholder selectors, but not parent selectors.
+
+See also selector.replace().
+
+```SCSS
+
+@debug selector.extend("a.disabled", "a", ".link"); // a.disabled, .link.disabled
+@debug selector.extend("a.disabled", "h1", "h2"); // a.disabled
+@debug selector.extend(".guide .info", ".info", ".content nav.sidebar");
+// .guide .info, .guide .content nav.sidebar, .content .guide nav.sidebar
 
 ```
 
 ```SCSS
 
+selector.nest($selectors...)
+selector-nest($selectors...) //=> selector 
+
+```
+
+Combines $selectors as though they were nested within one another in the stylesheet.
+
+The $selectors may contain placeholder selectors. Unlike other selector functions, all of them except the first may also contain parent selectors.
+
+See also selector.append().
+
+```SCSS
+
+@debug selector.nest("ul", "li"); // ul li
+@debug selector.nest(".alert, .warning", "p"); // .alert p, .warning p
+@debug selector.nest(".alert", "&:hover"); // .alert:hover
+@debug selector.nest(".accordion", "&__copy"); // .accordion__copy
 
 ```
 
 ```SCSS
 
+selector.parse($selector)
+selector-parse($selector) //=> selector 
+
+```
+
+Returns $selector in the selector value format.
+
+```SCSS
+
+@debug selector.parse(".main aside:hover, .sidebar p");
+// ((unquote(".main") unquote("aside:hover")),
+//  (unquote(".sidebar") unquote("p")))
 
 ```
 
 ```SCSS
 
+selector.replace($selector, $original, $replacement)
+selector-replace($selector, $original, $replacement) //=> selector 
+
+```
+Returns a copy of $selector with all instances of $original replaced by $replacement.
+
+This uses the @extend rule’s intelligent unification to make sure $replacement is seamlessly integrated into $selector. If $selector doesn’t contain $original, returns it as-is.
+
+The $selector, $original, and $replacement selectors may contain placeholder selectors, but not parent selectors.
+
+See also selector.extend().
+
+```SCSS
+
+@debug selector.replace("a.disabled", "a", ".link"); // .link.disabled
+@debug selector.replace("a.disabled", "h1", "h2"); // a.disabled
+@debug selector.replace(".guide .info", ".info", ".content nav.sidebar");
+// .guide .content nav.sidebar, .content .guide nav.sidebar
 
 ```
 
 ```SCSS
 
+selector.unify($selector1, $selector2)
+selector-unify($selector1, $selector2) //=> selector | null 
+
+```
+Returns a selector that matches only elements matched by both $selector1 and $selector2.
+
+Returns null if $selector1 and $selector2 don’t match any of the same elements, or if there’s no selector that can express their overlap.
+
+Like selectors generated by the @extend rule, the returned selector isn’t guaranteed to match all the elements matched by both $selector1 and $selector2 if they’re both complex selectors.
+
+```SCSS
+
+@debug selector.unify("a", ".disabled"); // a.disabled
+@debug selector.unify("a.disabled", "a.outgoing"); // a.disabled.outgoing
+@debug selector.unify("a", "h1"); // null
+@debug selector.unify(".warning a", "main a"); // .warning main a, main .warning a
 
 ```
 
 ```SCSS
 
+selector.simple-selectors($selector)
+simple-selectors($selector) //=> list 
 
 ```
+Returns a list of simple selectors in $selector.
+
+The $selector must be a single string that contains a compound selector. This means it may not contain combinators (including spaces) or commas.
+
+The returned list is comma-separated, and the simple selectors are unquoted strings.
 
 ```SCSS
 
+@debug selector.simple-selectors("a.disabled"); // a, .disabled
+@debug selector.simple-selectors("main.blog:after"); // main, .blog, :after
 
 ```
 
-```SCSS
 
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
+# sass:string
 
 ```SCSS
 
