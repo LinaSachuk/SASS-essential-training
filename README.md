@@ -3837,49 +3837,74 @@ string.slice($string, $start-at, $end-at: -1)
 str-slice($string, $start-at, $end-at: -1) //=> string 
 
 ```
+Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
+
 
 ```SCSS
 
+@debug string.slice("Helvetica Neue", 11); // "Neue"
+@debug string.slice("Helvetica Neue", 1, 3); // "Hel"
+@debug string.slice("Helvetica Neue", 1, -6); // "Helvetica"
 
 ```
 
 ```SCSS
 
+string.to-upper-case($string)
+to-upper-case($string) //=> string 
 
 ```
+Returns a copy of $string with the ASCII letters converted to upper case.
 
 ```SCSS
 
-
-```
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
+@debug string.to-upper-case("Bold"); // "BOLD"
+@debug string.to-upper-case(sans-serif); // SANS-SERIF
 
 ```
 
 
 ```SCSS
 
+string.to-lower-case($string)
+to-lower-case($string) //=> string 
+
+```
+Returns a copy of $string with the ASCII letters converted to lower case.
+
+```SCSS
+
+@debug string.to-lower-case("Bold"); // "bold"
+@debug string.to-lower-case(SANS-SERIF); // sans-serif
+
+```
+
+```SCSS
+
+string.unique-id()
+unique-id() //=> string 
+
+```
+Returns a randomly-generated unquoted string that’s guaranteed to be a valid CSS identifier and to be unique within the current Sass compilation.
+
+```SCSS
+
+@debug string.unique-id(); // uabtrnzug
+@debug string.unique-id(); // u6w1b1def
+
+```
+
+```SCSS
+
+string.unquote($string)
+unquote($string) //=> string 
+
+```
+Returns $string as an unquoted string. This can produce strings that aren’t valid CSS, so use with caution.
+
+```SCSS
+@debug string.unquote("Helvetica"); // Helvetica
+@debug string.unquote(".widget:hover"); // .widget:hover
 
 ```
 
