@@ -3771,47 +3771,70 @@ The returned list is comma-separated, and the simple selectors are unquoted stri
 
 ```SCSS
 
+string.quote($string)
+quote($string) //=> string 
 
 ```
 
-```SCSS
-
-
-```
+Returns $string as a quoted string.
 
 ```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
-
-```
-
-```SCSS
-
+@debug string.quote(Helvetica); // "Helvetica"
+@debug string.quote("Helvetica"); // "Helvetica"
 
 ```
 
 
 ```SCSS
 
+string.index($string, $substring)
+str-index($string, $substring) //=> number 
+
+```
+Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
+
+```SCSS
+
+@debug string.index("Helvetica Neue", "Helvetica"); // 1
+@debug string.index("Helvetica Neue", "Neue"); // 11
+
+```
+
+```SCSS
+string.insert($string, $insert, $index)
+str-insert($string, $insert, $index) //=> string 
+
+```
+Returns a copy of $string with $insert inserted at $index.
+
+```SCSS
+
+@debug string.insert("Roboto Bold", " Mono", 7); // "Roboto Mono Bold"
+@debug string.insert("Roboto Bold", " Mono", -6); // "Roboto Mono Bold"
 
 ```
 
 ```SCSS
 
+string.length($string)
+str-length($string) //=> number 
+
+```
+
+Returns the number of characters in $string.
+
+```SCSS
+
+@debug string.length("Helvetica Neue"); // 14
+@debug string.length(bold); // 4
+@debug string.length(""); // 0
+
+```
+
+```SCSS
+
+string.slice($string, $start-at, $end-at: -1)
+str-slice($string, $start-at, $end-at: -1) //=> string 
 
 ```
 
